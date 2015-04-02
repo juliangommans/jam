@@ -4,7 +4,8 @@ module MoviesHelper
 
     def self.trailer
       @data = HTTParty.get("http://api.traileraddict.com/?featured=yes")
-      puts @data.to_json
+      @data = @data.parsed_response["trailers"]["trailer"]
+      return @data.to_json
     end
 
   end
