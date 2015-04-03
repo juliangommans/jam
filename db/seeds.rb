@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
+
+Movie.delete_all
+Jamjam.delete_all
+
+3.times do |i|
+  Movie.create(title: Faker::Commerce.product_name)
+  3.times do |j|
+    Jamjam.create(user_id: j+1, movie_id: i+1, watched: false, prerating: 50, postrating: 50)
+  end
+end
