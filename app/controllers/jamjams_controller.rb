@@ -1,26 +1,35 @@
 class JamjamsController < ApplicationController
 
 	def add
-		# Jamjam.create(user_id = current_user.id, movie_id = params[:id])
+    redirect_to new_user_session_path unless user_signed_in?
+    j = Jamjam.new
+    j.movie_id = params[:id]
+    j.user_id = current_user.id
+    j.watched = false
+    # prompt for pre-rating (ajax?)
+    j.save
+    redirect_to jamjams_path
 	end
 
   def remove
-    #@movie = Jamjam.find(params[:id])
-      #if @movie.watched = false
-        #@movie.destroy!
-      #end
+    redirect_to new_user_session_path unless user_signed_in?
+    @jamjam = Jamjam.find(params[:id])
+    @jamjam.destroy
+    redirect_to jamjams_path
   end
 
   def watched
-    #@movie = Jamjam.find(params[:id])
-      #if @movie.watched = false
-        #@movie.watched = true
-        #@movie.save
-      #end
+    redirect_to new_user_session_path unless user_signed_in?
+    @jamjam = Jamjam.find(params[:id])
+    @jamjam.watched = true
+    # prompt for pre-rating (ajax?)
+    @jamjam.save
+    redirect_to jamjams_path
   end
 
-  def list
-    #@list = Jamjam.where(user_id: current_user, watched: false)
+  def index
+    redirect_to new_user_session_path unless user_signed_in?
+    @jamjams = Jamjam.where(user_id: current_user.id)
   end
 
 end
