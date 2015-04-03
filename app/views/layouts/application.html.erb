@@ -6,10 +6,30 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
-
+<body>    
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+          <div class="navbar-header">
+              <%= link_to "Home", root_path %>
+          </div>
+          <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                  <li><%= link_to "Home", root_path %></li>
+                  <li><%= link_to "Account", root_path %></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li> Welcome JAMmer: <%= current_user.email %></li> </li>
+                <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  <div class="container body-content">
+         <%= yield %>
+      <hr />
+      <footer class="footer">
+        <p><%= Time.now.strftime("%m/%d/%Y %I:%M%p") %> - Main JAMmer's Jullian Gommans, Sandra Muller, Steven Brown</p>
+      </footer>
+  </div>
 </body>
 </html>
