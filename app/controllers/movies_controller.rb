@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
 
   def trailer
     @trailer = MoviesHelper::TrailerAddictAPI.trailer
+    render json: @trailer
   end
 
   def upcoming

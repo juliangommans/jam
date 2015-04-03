@@ -5,19 +5,15 @@ $(document).ready(function(){
         
  });
 
-
-
     function LoadTrailer() {
       $('.viewTrailer').children().remove();
  
       $.getJSON("/trailer")
       .done(function (data) {
-         $.each(data, function (key, item) {
-              alert(item);
-              $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+item.trailer_id+
+              $('.viewTrailer').append('<h3>Trailer - '+data.title+'</h3>');
+              $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
               '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
          });  
-      });
     }; 
     
     function Upcoming(){
