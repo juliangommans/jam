@@ -1,3 +1,3 @@
 class Movie < ActiveRecord::Base
-  has_many :jamjams
+  has_many :moviejams
 end
