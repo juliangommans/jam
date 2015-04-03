@@ -19,4 +19,8 @@ class JamjamsController < ApplicationController
       #end
   end
 
+  def list
+    #@list = Jamjam.where(user_id: current_user, watched: false)
+  end
+
 end
