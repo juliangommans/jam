@@ -1,6 +1,7 @@
 $(document).ready(function(){
-        Upcoming();
-        LoadTrailer();
+
+    Upcoming();
+    LoadTrailer();
         
  });
 
@@ -27,8 +28,14 @@ $(document).ready(function(){
           
             for(var i = 0; i < 10; i++){
                upcomingMovie[i] = data.movies[i];
-              $('.upcoming').append('<div class="col-md-1" id="poster"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>');
+              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>');
             }
+            
+                 $('.poster').on('click', function(e) {
+                   e.preventDefault();
+                    $('.poster').removeClass('active');
+                    $(this).addClass('active');
+                });
         });
     };
     
@@ -36,8 +43,6 @@ $(document).ready(function(){
       $('.mySearch').children().remove();
       $('.mySearch').append('<p>Coming Soon!</p>'); 
     };
-
-
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
@@ -51,7 +56,6 @@ $(document).ready(function(){
     }
     return array;
   }
-
 
 
 
