@@ -19,7 +19,7 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <% if !current_user.nil? %>
-                <li> Welcome JAMmer: <%= current_user.name %></li> </li>
+                <li> Welcome JAM-mer: <%= current_user.name %></li> </li>
                 <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
                 <% end %>
               </ul>
