@@ -2,3 +2,16 @@ html, body {
     height: 100%;
 }
 
+.headFix {
+    width: 300px;
+    margin-top: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer {
+    margin-top:5%;
+
+}
+
