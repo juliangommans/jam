@@ -4,14 +4,15 @@ $(document).ready(function(){
         
  });
 
-var videoId = 81707;
-
     function LoadTrailer() {
       $('.viewTrailer').children().remove();
-      $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+videoId+
-          '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
-          
-
+ 
+      $.getJSON("/trailer")
+      .done(function (data) {
+              $('.viewTrailer').append('<h3>Trailer - '+data.title+'</h3>');
+              $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
+              '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
+         });  
     }; 
     
     function Upcoming(){
