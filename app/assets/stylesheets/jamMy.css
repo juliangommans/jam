@@ -12,6 +12,18 @@ html, body {
 
 .footer {
     margin-top:5%;
+}
 
+.col-md-1 {
+    width:150px;
+    height: 150px;
+}
+
+#poster {
+    text-align: center;
+}
+
+.search {
+    position: relative;
 }
 

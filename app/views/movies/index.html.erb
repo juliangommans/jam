@@ -4,19 +4,26 @@
     <pclass="lead">What movie will you JAM tonight?</p><br>
 </div>
 <div class="row">
-    <div class="col-md-8">
-        <h2>Upcoming Movies</h2>
-        <div class="upcoming" ></div><br>
+    <div class="col-md-9">
+        <div class="row">
+            <h2>Upcoming Movies</h2>
+            <div class="upcoming" ></div>
+        </div><br>
+        
+        <div class="row search">
+                <h2 >My Movie Search</h2>
+                <input type="text"  id="query" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()" />
+                <input type="button"  id="btnSearch" value="Search" onclick="PostSearch();" />
+                <div class="mySearch"></div>
+            </div><br>
+        </div><br>
 
-        <h2>My Movie Search</h2>
-        <input type="text" id="query" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()" />
-        <input type="button" id="btnSearch" value="Search" onclick="PostSearch();" />
-        <div class="mySearch"></div><br>
-
-        <div class="viewTrailer"></div>
+        <div class="row viewTrailer">
+            <!--div class="viewTrailer"></div-->
+        </div>
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>My Movie JAM</h2>
         <div class="myList"></div>
         <li>data</li>
