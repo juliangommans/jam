@@ -18,7 +18,7 @@ module MoviesHelper
       return @data.strip
     end
 
-    # def self.search#(name)"http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+name+"&page_limit=10"
+      # def self.search#(name)"http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+name+"&page_limit=10"
     #   @data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q=star&page_limit=10")
     #   hashed = JSON.parse(@data.strip)
     #   hashed = hashed["movies"]
