@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
 
   def index
     redirect_to new_user_session_path unless user_signed_in?
-    @movies = Movie.all
+    @movies = "test subject"
   end
 
   def trailer
@@ -10,7 +10,8 @@ class MoviesController < ApplicationController
   end
 
   def upcoming
-    @bang = MoviesHelper::RottenTomatoesAPI.upcoming
+    @data = MoviesHelper::RottenTomatoesAPI.upcoming
+    render json: @data
   end
 
   def search
