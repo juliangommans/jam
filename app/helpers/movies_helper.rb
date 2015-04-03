@@ -13,6 +13,11 @@ module MoviesHelper
   class RottenTomatoesAPI
     include HTTParty
 
+    def self.upcoming
+      @data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=pavxvfcq6kjfscnvdj6cga6r")
+      return @data.strip
+    end
+
     def self.search(name)
       @data = HTTParty.get( )
       # do stuff to data
