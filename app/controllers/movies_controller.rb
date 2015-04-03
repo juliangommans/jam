@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
     redirect_to new_user_session_path unless user_signed_in?
     @movies = Movie.all
     @trailer = MoviesHelper::TrailerAddictAPI.trailer
+    #@bang = MoviesHelper::RottenTomatoesAPI.upcoming
   end
 
   def search
