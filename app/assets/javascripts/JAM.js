@@ -15,19 +15,19 @@ $(document).ready(function(){
          });  
     }; 
     
+  var upcomingMovie = [];
+  
     function Upcoming(){
       $('.upcoming').children().remove();
-      $.ajax({
-        url: '/upcoming',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data,status){
-          console.log(data["movies"][0].posters.thumbnail);
-          var movies = shuffle(data["movies"]);
-          for(var i=0;i<8;i++){
-          $('.upcoming').append('<div class="poster" id="'+ movies[i].title +'"><img src="'+movies[i].posters.thumbnail+'" id="'+movies[i].ratings.critics_score+'class="'+ movies[i].alternate_ids.imdb +'"></div>');
-        }}
-      });
+      $.getJSON("/upcoming")
+        .done(function (data) {
+          shuffle(data.movies);
+          upcomingMovie = [];
+            for(var i = 0; i < 10; i++){
+               upcomingMovie[i] = data.movies[i];
+              $('.upcoming').append('<div class="col-md-1" id="poster"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>');
+            }
+        });
     };
     
     function PostSearch(){
@@ -35,21 +35,19 @@ $(document).ready(function(){
       $('.mySearch').append('<p>Coming Soon!</p>'); 
     };
 
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex ;
 
-  while (0 !== currentIndex){
-
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
   }
-
-  return array;
-}
 
 
 

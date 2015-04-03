@@ -1,0 +1,21 @@
+<h1>This will be covered up by the header atm</h1>
+<h2>Jamjams for <%= current_user.name %></h2>
+<h3>(<%= current_user.email %>)</h3>
+<ul>
+  <% if @jamjams.empty? %>
+    <li>Yes, you have no jamjams.</li>
+  <% else %>
+    <% @jamjams.each do |jamjam| %>
+      <li>
+        <%= jamjam.movie.title %>
+        <% if jamjam.watched %>
+         - (watched)
+        <% else %>
+         - (unwatched)
+        <%= button_to "Remove", {:controller => "jamjams", :action => 'remove', :id => jamjam.id }, :method => :post %>
+        <%= button_to "Watch", {:controller => "jamjams", :action => 'watched', :id => jamjam.id }, :method => :post %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
