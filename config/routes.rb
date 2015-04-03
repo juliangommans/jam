@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :movies, only: [:index]
   resources :jamjams, only: [:index]
 
-  get '/search' => 'movies#search', as: 'movie_search'
+  get '/search/:terms' => 'movies#search', as: 'movie_search'
   get '/trailer' => 'movies#trailer', as: 'movie_trailer'
   get '/upcoming' => 'movies#upcoming', as: 'movie_upcoming'
 

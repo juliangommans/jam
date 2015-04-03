@@ -26,10 +26,8 @@ $(document).ready(function(){
           var movies = shuffle(data["movies"]);
           for(var i=0;i<8;i++){
           $('.upcoming').append('<div class="poster" id="'+ movies[i].title +'"><img src="'+movies[i].posters.thumbnail+'" id="'+movies[i].ratings.critics_score+'class="'+ movies[i].alternate_ids.imdb +'"></div>');
-        }
-        }
+        }}
       });
-      
     };
     
     function PostSearch(){
@@ -40,7 +38,7 @@ $(document).ready(function(){
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;
 
-  while (0 !== currentIndex) {
+  while (0 !== currentIndex){
 
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
