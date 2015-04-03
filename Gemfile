@@ -51,6 +51,6 @@ group :development, :test do
   gem 'spring'
 end
 
-gem "therubyracer"
-gem "less-rails"
+# gem "therubyracer"
+# gem "less-rails"
 gem "twitter-bootstrap-rails"
