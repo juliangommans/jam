@@ -9,6 +9,11 @@ class MoviesController < ApplicationController
     @trailer = MoviesHelper::TrailerAddictAPI.trailer
     render json: @trailer
   end
+  
+  def mytrailer
+      @mytrailer = MoviesHelper::TrailerAddictAPI.mytrailer(params[:imdb])
+      render json: @mytrailer
+  end
 
   def upcoming
     @data = MoviesHelper::RottenTomatoesAPI.upcoming
