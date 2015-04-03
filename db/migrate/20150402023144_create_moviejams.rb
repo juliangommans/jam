@@ -1,6 +1,6 @@
-class CreateJamjams < ActiveRecord::Migration
+class CreateMoviejams < ActiveRecord::Migration
   def change
-    create_table :jamjams do |t|
+    create_table :moviejams do |t|
 
       t.belongs_to :user, index: true
       t.belongs_to :movie, index: true

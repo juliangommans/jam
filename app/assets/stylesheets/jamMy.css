@@ -12,6 +12,7 @@ html, body {
 
 .footer {
     margin-top:5%;
+    text-align:center;
 }
 
 .col-md-1 {
@@ -19,8 +20,14 @@ html, body {
     height: 150px;
 }
 
-#poster {
+.poster {
     text-align: center;
+    padding-top: 25px;
+}
+
+.poster:active {
+    background-color: yellow;
+    border-radius: 10px;
 }
 
 .search {

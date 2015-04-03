@@ -1,7 +1,7 @@
 <div class="jumbotron">
     <h1>Just Another Movie!</h1>
-    <h3>Welcome JAMmer: <%= current_user.name %></h3><br>
-    <pclass="lead">What movie will you JAM tonight?</p><br>
+    <h2>Welcome JAM-mer: <%= current_user.name %></h2><br>
+    <h3 class="lead">What movie will you JAM tonight?</h3><br>
 </div>
 <div class="row">
     <div class="col-md-9">
@@ -10,17 +10,16 @@
             <div class="upcoming" ></div>
         </div><br>
         
-        <div class="row search">
+        <div class="row">
+            <div class="search">
                 <h2 >My Movie Search</h2>
                 <input type="text"  id="query" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()" />
                 <input type="button"  id="btnSearch" value="Search" onclick="PostSearch();" />
                 <div class="mySearch"></div>
-            </div><br>
+            </div>
         </div><br>
 
-        <div class="row viewTrailer">
-            <!--div class="viewTrailer"></div-->
-        </div>
+        <div class="viewTrailer"></div>
 
     </div>
     <div class="col-md-3">

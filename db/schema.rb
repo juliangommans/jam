@@ -5,7 +5,7 @@ ActiveRecord::Schema.define(version: 20150402024221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "jamjams", force: :cascade do |t|
+  create_table "moviejams", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "movie_id"
     t.boolean  "watched",    default: false
@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20150402024221) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "jamjams", ["movie_id"], name: "index_jamjams_on_movie_id", using: :btree
-  add_index "jamjams", ["user_id"], name: "index_jamjams_on_user_id", using: :btree
+  add_index "moviejams", ["movie_id"], name: "index_moviejams_on_movie_id", using: :btree
+  add_index "moviejams", ["user_id"], name: "index_moviejams_on_user_id", using: :btree
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
