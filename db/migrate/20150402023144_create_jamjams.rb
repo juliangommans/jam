@@ -4,7 +4,7 @@ class CreateJamjams < ActiveRecord::Migration
 
       t.belongs_to :user, index: true
       t.belongs_to :movie, index: true
-      t.boolean :watched
+      t.boolean :watched, default: false
       t.integer :prerating
       t.integer :postrating
       t.timestamps null: false
