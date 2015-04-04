@@ -8,6 +8,7 @@ $(document).ready(function(){
 var upcomingMovie = [];
 var currentMovie = "";
 var imdb = "";
+var j= 0;
 
 
     function FeatureTrailer() {
@@ -44,7 +45,7 @@ var imdb = "";
            $(this).addClass('active');
            var index = $(this).attr('id');
             imdb = upcomingMovie[index].alternate_ids.imdb;
-            currentMovie = upcomingMovie[index]
+            currentMovie = upcomingMovie[index];
             IMDBtrailer(imdb);
      
         });
@@ -56,18 +57,19 @@ var imdb = "";
  
         $.getJSON("/mytrailer/" + imdb)
           .done(function (data) {
-              LoadTrailer(data);
-               $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>');
-               $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
+             LoadTrailer(data);
+             if(currentMovie.synopsis){
+                    $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
+              else { $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.Plot+'</p>'); }
+            $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
           });  
   }
     
     
     function PostSearch(){
         var terms = $('#query').val();
-        $('#query').val();
         $('.mySearch').children().remove();
-
+        $('#query').val("");
         if (terms === "" || terms === null) {
             alert('Please enter a valid search item!');
         }
@@ -75,22 +77,32 @@ var imdb = "";
             $(function () {
                 $.getJSON( "http://www.omdbapi.com/?t="+terms+"&y=&plot=short&r=json")
                   .done(function (data) {
-                     $('.mySearch').append('<p>'+data.Title+'</p>') 
-                      $('.mySearch').append('<li>'+data.Year+'</li>');
-                      $('.mySearch').append('<li>'+data.Plot+'</li>');
-                      $('.mySearch').append('<br><img src="'+data.Poster+'">');
-                    });
+                        $('.mySearch').append('<h3 style="color:blue"><strong>'+data.Title+'</strong></h3>') 
+                        $('.mySearch').append('<li>'+data.Year+'</li>');
+                        $('.mySearch').append('<li>'+data.Plot+'</li>');
+                        $('.mySearch').append('<li>'+data.imdbRating+'</li>');
+                        //$('.mySearch').append('<br><img src="'+data.Poster+'">');
+                        $('.mySearch h3').on('click', function() {
+                            currentMovie = data;
+                            var imdbN = (data.imdbID).substring(2);
+                            IMDBtrailer(imdbN);
+                        });
+                  });
             });
         }
     }
 
     function AddList() {
-        $('.myList').append('<li>'+currentMovie.title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>')
+        if(currentMovie.title){
+            $('.myList').append('<li id='+j+'>'+currentMovie.title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>'); }
+        else { $('.myList').append('<li id='+j+'>'+currentMovie.Title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>'); }
+
     }
     
     function Remove() {
-        ('#remove').click(function(){
-            $(this).remove('li'); 
+        $('#remove').click(function(){
+            var item = $(this).attr('id');
+            $('.myList').remove('#'+item+''); 
         });
 
     }
