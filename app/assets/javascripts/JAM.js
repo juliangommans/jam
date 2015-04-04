@@ -5,10 +5,10 @@ $(document).ready(function(){
         
  });
  
-var trailerID = ""; 
 var upcomingMovie = [];
+var currentMovie = "";
 var imdb = "";
-var searchedMovies = [];
+
 
     function FeatureTrailer() {
         $('.viewTrailer').children().remove();
@@ -33,62 +33,67 @@ var searchedMovies = [];
         .done(function (data) {
           shuffle(data.movies);
           upcomingMovie = [];
-            for(var i = 0; i < 10; i++){
+          for(var i = 0; i < 10; i++){
                upcomingMovie[i] = data.movies[i];
-              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'" data-tooltip="#tip'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p>');
-
+              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p>');
             }
-                 $('.poster').on('click', function(e) {
-                   e.preventDefault();
-                    $('.poster').removeClass('active');
-                    $(this).addClass('active');
-                    var index = $(this).attr('id');
-                    imdb = upcomingMovie[index].alternate_ids.imdb;
-                    IMDBtrailer(imdb,upcomingMovie[index].synopsis );
-                });
-                            
+        
+         $('.poster').on('click', function(e) {
+           e.preventDefault();
+           $('.poster').removeClass('active');
+           $(this).addClass('active');
+           var index = $(this).attr('id');
+            imdb = upcomingMovie[index].alternate_ids.imdb;
+            currentMovie = upcomingMovie[index]
+            IMDBtrailer(imdb);
+     
         });
+      });
     }
     
-    function IMDBtrailer(imdb, synopsis) {
+    function IMDBtrailer(imdb) {
         $('.viewTrailer').children().remove();
  
         $.getJSON("/mytrailer/" + imdb)
           .done(function (data) {
               LoadTrailer(data);
-               $('.viewTrailer').append('<p style="text-align:justify">'+synopsis+'</p>');
+               $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>');
+               $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
           });  
   }
     
     
     function PostSearch(){
+        var terms = $('#query').val();
+        $('#query').val();
+        $('.mySearch').children().remove();
 
-      $('.movie-link').children().remove();
-      var terms = document.getElementById("query").value;
-      if(terms===''){
-        alert("please enter something in the search field")
-      }else{
-        popup('popUpDiv');
-        $.getJSON("/search/" + terms)
-        .done(function (data) {
-          searchedMovies = [];
-          var movies = data.movies
-          for(var i=0;i<movies.length;i++){
-            searchedMovies[i] = movies[i] 
-            $('#a'+i+'').append('<img src="'+movies[i].posters.profile+'"><p>'+movies[i].title+'</p>')   
+        if (terms === "" || terms === null) {
+            alert('Please enter a valid search item!');
+        }
+        else {
+            $(function () {
+                $.getJSON( "http://www.omdbapi.com/?t="+terms+"&y=&plot=short&r=json")
+                  .done(function (data) {
+                     $('.mySearch').append('<p>'+data.Title+'</p>') 
+                      $('.mySearch').append('<li>'+data.Year+'</li>');
+                      $('.mySearch').append('<li>'+data.Plot+'</li>');
+                      $('.mySearch').append('<br><img src="'+data.Poster+'">');
+                    });
+            });
+        }
+    }
 
-          }
-            $('.movie-link').on('click', function(e) {
-                   e.preventDefault();
-                    var index = $(this).attr('id').replace(/a/,'')
-                    console.log(index)
-                    imdb = movies[index].alternate_ids.imdb;
-                    IMDBtrailer(imdb);
-              });
+    function AddList() {
+        $('.myList').append('<li>'+currentMovie.title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>')
+    }
+    
+    function Remove() {
+        ('#remove').click(function(){
+            $(this).remove('li'); 
         });
-      }
-    };
 
+    }
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
