@@ -1,24 +1,32 @@
 $(document).ready(function(){
 
     Upcoming();
-    LoadTrailer();
+    FeatureTrailer();
         
  });
-
-    function LoadTrailer() {
-      $('.viewTrailer').children().remove();
  
-      $.getJSON("/trailer")
-      .done(function (data) {
-              $('.viewTrailer').append('<h3>Trailer - '+data.title+'</h3>');
-              $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
-              '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
-         });  
-    }; 
+var trailerID = ""; 
+var upcomingMovie = [];
+var imdb = "";
+
+    function FeatureTrailer() {
+        $('.viewTrailer').children().remove();
+ 
+        $.getJSON("/trailer")
+          .done(function (data) {
+              LoadTrailer(data);
+          });  
+    }
     
-  var upcomingMovie = [];
-  
-    function Upcoming(){
+    function LoadTrailer(data) {
+        $('.viewTrailer').children().remove();
+   
+        $('.viewTrailer').append('<h3>Trailer - '+data.title+'</h3>');
+        $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
+        '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
+    }
+    
+    function Upcoming() {
       $('.upcoming').children().remove();
       $.getJSON("/upcoming")
         .done(function (data) {
@@ -33,14 +41,27 @@ $(document).ready(function(){
                    e.preventDefault();
                     $('.poster').removeClass('active');
                     $(this).addClass('active');
+                    var index = $(this).attr('id');
+                    imdb = upcomingMovie[index].alternate_ids.imdb;
+                    IMDBtrailer(imdb);
                 });
         });
-    };
+    }
+    
+    function IMDBtrailer(imdb) {
+        $('.viewTrailer').children().remove();
+ 
+        $.getJSON("/mytrailer/" + imdb)
+          .done(function (data) {
+              LoadTrailer(data);
+          });  
+  }
+    
     
     function PostSearch(){
       $('.mySearch').children().remove();
       $('.mySearch').append('<p>Coming Soon!</p>'); 
-    };
+    }
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
