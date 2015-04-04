@@ -22,7 +22,7 @@ var searchedMovies = [];
     function LoadTrailer(data) {
         $('.viewTrailer').children().remove();
    
-        $('.viewTrailer').append('<h3>Trailer - '+data.title+'</h3>');
+        $('.viewTrailer').append('<h3><strong>'+data.title+'</strong></h3>');
         $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
         '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
     }
@@ -35,9 +35,8 @@ var searchedMovies = [];
           upcomingMovie = [];
             for(var i = 0; i < 10; i++){
                upcomingMovie[i] = data.movies[i];
-              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'" data-tooltip="#tip'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>'+
-                      '<div class="synopsis" id=tip'+i+'">'+upcomingMovie[i].synopsis+'</div>');
-                      $('.synopsis').hide();
+              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'" data-tooltip="#tip'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p>');
+
             }
                  $('.poster').on('click', function(e) {
                    e.preventDefault();
@@ -45,22 +44,19 @@ var searchedMovies = [];
                     $(this).addClass('active');
                     var index = $(this).attr('id');
                     imdb = upcomingMovie[index].alternate_ids.imdb;
-                    IMDBtrailer(imdb);
+                    IMDBtrailer(imdb,upcomingMovie[index].synopsis );
                 });
                             
-                $('.poster').on('mouseover','.synopsis', function(e) {
-                      $(this).css({left: e.pageX + 1, top: e.pageY + 1})
-                            .stop().show(100); }, 
-                      function() { $(this).hide();  });
         });
     }
     
-    function IMDBtrailer(imdb) {
+    function IMDBtrailer(imdb, synopsis) {
         $('.viewTrailer').children().remove();
  
         $.getJSON("/mytrailer/" + imdb)
           .done(function (data) {
               LoadTrailer(data);
+               $('.viewTrailer').append('<p style="text-align:justify">'+synopsis+'</p>');
           });  
   }
     
@@ -106,8 +102,4 @@ var searchedMovies = [];
     }
     return array;
   }
-
-  
-
-
 

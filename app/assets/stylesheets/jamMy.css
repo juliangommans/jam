@@ -34,15 +34,26 @@ html, body {
     position: relative;
 }
 
-.synopsis {
-    position: absolute;
-    background: #ccc;
-    border: 1px solid;
+.viewTrailer {
+    text-align:center;
+    border: solid;
+    border-width:2px;
+    border-color: #075876;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px #297995;
+    margin-bottom:30px;
 }
 
 .movie-link {
   color: white;
   text-decoration: none;
+}
+
+.jumbotron {
+    height:150px;
+    background-color: #BCDFE6;
+    
 }
 
 #blanket {
