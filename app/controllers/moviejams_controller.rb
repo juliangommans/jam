@@ -30,6 +30,7 @@ class MoviejamsController < ApplicationController
   def index
     redirect_to new_user_session_path unless user_signed_in?
     @moviejams = Moviejam.where(user_id: current_user.id)
+    @moviejams = Moviejam.sort_moviejams(@moviejams) #.json ? eventually
   end
 
 end
