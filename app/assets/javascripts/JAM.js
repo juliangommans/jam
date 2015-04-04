@@ -37,7 +37,8 @@ var imdb = "";
             for(var i = 0; i < 10; i++){
                upcomingMovie[i] = data.movies[i];
               $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'" data-tooltip="#tip'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>'+
-                      '<p class="synopsis" id=tip'+i+'">'+upcomingMovie[i].synopsis+'</p>');
+                      '<div class="synopsis" id=tip'+i+'">'+upcomingMovie[i].synopsis+'</div>');
+                      $('.synopsis').hide();
             }
             
                  $('.poster').on('click', function(e) {
@@ -49,10 +50,10 @@ var imdb = "";
                     IMDBtrailer(imdb);
                 });
                             
-                $('.poster').on('mouseover','p', function(e) {
+                $('.poster').on('mouseover','.synopsis', function(e) {
                       $(this).css({left: e.pageX + 1, top: e.pageY + 1})
                             .stop().show(100); }, 
-                      function() { (this).hide();  });
+                      function() { $(this).hide();  });
         });
     }
     
