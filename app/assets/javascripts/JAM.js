@@ -101,8 +101,7 @@ var j= 0;
     
     function Remove() {
         $('#remove').click(function(){
-            var item = $(this).attr('id');
-            $('.myList').remove('#'+item+''); 
+            $(this).closest('li').remove();
         });
 
     }
