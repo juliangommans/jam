@@ -38,8 +38,22 @@ $(document).ready(function(){
     };
     
     function PostSearch(){
-      $('.mySearch').children().remove();
-      $('.mySearch').append('<p>Coming Soon!</p>'); 
+      $('#popUpDiv').children().remove();
+      var terms = document.getElementById("query").value;
+      if(terms===''){
+        alert("please enter something in the serach field")
+      }else{
+        popup('popUpDiv');
+        $.getJSON("/search/" + terms)
+        .done(function (data) {
+          var movies = data.movies
+          for(var i=0;i<movies.length;i++){
+            $('#popUpDiv').append('<div ><img src="'+movies[i].posters.profile+'"><a onclick="popup("popUpDiv")">'+movies[i].title+'</a></div>')
+
+          }
+
+        });
+      }
     };
 
   function shuffle(array) {
@@ -54,6 +68,8 @@ $(document).ready(function(){
     }
     return array;
   }
+
+  
 
 
 

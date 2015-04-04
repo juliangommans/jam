@@ -5,7 +5,6 @@ class CreateMovies < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.integer :rating
-      
       t.integer :trailer_id
       t.integer :imdb
       t.timestamps null: false
