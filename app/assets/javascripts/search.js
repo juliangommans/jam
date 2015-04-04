@@ -49,10 +49,3 @@ function popup(windowname) {
 	toggle('blanket');
 	toggle(windowname);		
 }
-
-// $('.selectMovie').on("click",function(){
-// 	popup('popUpDiv')
-// 	// $('#popUpDiv').style.display = 'none';
-// 	// $('#blanket').style.display = 'none';
-// 	$('#popUpDiv').children().remove();
-// })
