@@ -36,7 +36,8 @@ var imdb = "";
           
             for(var i = 0; i < 10; i++){
                upcomingMovie[i] = data.movies[i];
-              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>');
+              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'" data-tooltip="#tip'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>'+
+                      '<p class="synopsis" id=tip'+i+'">'+upcomingMovie[i].synopsis+'</p>');
             }
             
                  $('.poster').on('click', function(e) {
@@ -47,6 +48,11 @@ var imdb = "";
                     imdb = upcomingMovie[index].alternate_ids.imdb;
                     IMDBtrailer(imdb);
                 });
+                            
+                $('.poster').on('mouseover','p', function(e) {
+                      $(this).css({left: e.pageX + 1, top: e.pageY + 1})
+                            .stop().show(100); }, 
+                      function() { (this).hide();  });
         });
     }
     

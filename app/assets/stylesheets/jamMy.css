@@ -34,3 +34,10 @@ html, body {
     position: relative;
 }
 
+.synopsis {
+    position: absolute;
+    display: none;
+    background: #ccc;
+    border: 1px solid;
+}
+
