@@ -13,16 +13,15 @@ class MoviesController < ApplicationController
       @mytrailer = MoviesHelper::TrailerAddictAPI.mytrailer(params[:imdb])
       render json: @mytrailer
   end
-  
-  def search
-    @search = MoviesHelper::OMDbAPI.search(params[:terms])
-    render json: @search
-  end
 
   def upcoming
     @data = MoviesHelper::RottenTomatoesAPI.upcoming
     render json: @data
   end
 
+  def search
+    @search = MoviesHelper::RottenTomatoesAPI.search(params[:terms])
+    render json: @search
+  end
 
 end

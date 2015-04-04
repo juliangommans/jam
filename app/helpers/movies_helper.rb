@@ -16,17 +16,6 @@ module MoviesHelper
     end
 
   end
-  
-    
-  class OMDbAPI
-    include HTTParty
-    
-    def self.search(terms)
-      @data = HTTParty.get("http://www.omdbapi.com/?t=mockingjay&y=&plot=short&r=json")
-      return @data.strip
-    end
-
-  end
 
   class RottenTomatoesAPI
     include HTTParty
@@ -36,10 +25,14 @@ module MoviesHelper
       return @data.strip
     end
 
+    def self.search(terms)
+      @data = HTTParty.get("http://www.omdbapi.com/?t=#{terms}&y=&plot=short&r=json")
+      return @data.strip
+    end
+
     def self.check_db(movie)
       Movie.find_by(title: movie)
     end
 
   end
-  
 end
