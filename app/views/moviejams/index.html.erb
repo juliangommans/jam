@@ -1,20 +1,30 @@
-<h1>This will be covered up by the header atm</h1>
+<h1>This will be covered up by the header at the moment.</h1>
 <h2>Moviejams for <%= current_user.name %></h2>
 <h3>(<%= current_user.email %>)</h3>
+<h4>Your unwatched moviejams</h4>
 <ul>
-  <% if @moviejams.empty? %>
-    <li>Yes, you have no moviejams.</li>
+  <% if @moviejams[0].empty? %>
+    <li>Yes, you have no unwatched moviejams.</li>
   <% else %>
-    <% @moviejams.each do |moviejam| %>
+    <% @moviejams[0].each do |moviejam| %>
       <li>
         <%= moviejam.movie.title %>
-        <% if moviejam.watched %>
-         - (watched)
-        <% else %>
-         - (unwatched)
+         - (your prewatch rating: <%= moviejam.prerating %>)
         <%= button_to "Remove", {:controller => "moviejams", :action => 'remove', :id => moviejam.id }, :method => :post %>
         <%= button_to "Watch", {:controller => "moviejams", :action => 'watched', :id => moviejam.id }, :method => :post %>
-        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<h4>Your watched moviejams</h4>
+<ul>
+  <% if @moviejams[1].empty? %>
+    <li>Yes, you have no watched moviejams.</li>
+  <% else %>
+    <% @moviejams[1].each do |moviejam| %>
+      <li>
+        <%= moviejam.movie.title %>
+         - (your prewatch rating: <%= moviejam.prerating %> - your postwatch rating: <%= moviejam.postrating %>)
       </li>
     <% end %>
   <% end %>
