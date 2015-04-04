@@ -8,6 +8,7 @@ $(document).ready(function(){
 var trailerID = ""; 
 var upcomingMovie = [];
 var imdb = "";
+var searchedMovies = [];
 
     function FeatureTrailer() {
         $('.viewTrailer').children().remove();
@@ -36,7 +37,6 @@ var imdb = "";
                upcomingMovie[i] = data.movies[i];
               $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>');
             }
-            
                  $('.poster').on('click', function(e) {
                    e.preventDefault();
                     $('.poster').removeClass('active');
@@ -59,9 +59,33 @@ var imdb = "";
     
     
     function PostSearch(){
-      $('.mySearch').children().remove();
-      $('.mySearch').append('<p>Coming Soon!</p>'); 
-    }
+
+      $('.movie-link').children().remove();
+      var terms = document.getElementById("query").value;
+      if(terms===''){
+        alert("please enter something in the search field")
+      }else{
+        popup('popUpDiv');
+        $.getJSON("/search/" + terms)
+        .done(function (data) {
+          searchedMovies = [];
+          var movies = data.movies
+          for(var i=0;i<movies.length;i++){
+            searchedMovies[i] = movies[i] 
+            $('#a'+i+'').append('<img src="'+movies[i].posters.profile+'"><p>'+movies[i].title+'</p>')   
+
+          }
+            $('.movie-link').on('click', function(e) {
+                   e.preventDefault();
+                    var index = $(this).attr('id').replace(/a/,'')
+                    console.log(index)
+                    imdb = movies[index].alternate_ids.imdb;
+                    IMDBtrailer(imdb);
+              });
+        });
+      }
+    };
+
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
@@ -75,6 +99,8 @@ var imdb = "";
     }
     return array;
   }
+
+  
 
 
 
