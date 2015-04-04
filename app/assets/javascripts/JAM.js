@@ -28,12 +28,10 @@ var imdb = "";
     
     function Upcoming() {
       $('.upcoming').children().remove();
-      
       $.getJSON("/upcoming")
         .done(function (data) {
           shuffle(data.movies);
           upcomingMovie = [];
-          
             for(var i = 0; i < 10; i++){
                upcomingMovie[i] = data.movies[i];
               $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p></div>');

@@ -2,7 +2,8 @@ class MoviesController < ApplicationController
 
   def index
     redirect_to new_user_session_path unless user_signed_in?
-    #erb :index
+    @movies = "test subject"
+    # @search = MoviesHelper::RottenTomatoesAPI.search
   end
 
   def trailer
@@ -21,6 +22,7 @@ class MoviesController < ApplicationController
   end
 
   def search
+    @search = MoviesHelper::RottenTomatoesAPI.search(params[:terms])
 
   end
 
