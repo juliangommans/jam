@@ -26,9 +26,20 @@ module MoviesHelper
     end
 
     def self.search(name)
-      @data = HTTParty.get( )
-      # do stuff to data
-      # return @data
+      terms = name.gsub(' ','+')
+      @data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+terms+"&page_limit=3")
+      hashed = JSON.parse(@data.strip)
+      hashed = hashed["movies"]
+      hashed.each do |movie|
+        if !check_db(movie["title"])
+          Movie.create(title: movie["title"], description: movie["synopsis"], rating: movie["critics_score"], imdb: movie["alternate_ids"]["imdb"])
+        end
+      end
+      return @data.strip
+    end
+
+    def self.check_db(movie)
+      Movie.find_by(title: movie)
     end
 
   end
