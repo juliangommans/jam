@@ -8,7 +8,7 @@ class MoviejamsController < ApplicationController
       j.movie_id = movie.id
       j.user_id = current_user.id
       j.watched = false
-      # prompt for pre-rating (ajax?)
+      j.prerating = rand(0..100)
       j.save
     end
     redirect_to moviejams_path
@@ -25,7 +25,7 @@ class MoviejamsController < ApplicationController
     redirect_to new_user_session_path unless user_signed_in?
     @moviejam = Moviejam.find(params[:id])
     @moviejam.watched = true
-    # prompt for pre-rating (ajax?)
+    @moviejam.postrating = rand(0..100)
     @moviejam.save
     redirect_to moviejams_path
   end
