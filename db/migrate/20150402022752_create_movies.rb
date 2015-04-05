@@ -4,6 +4,7 @@ class CreateMovies < ActiveRecord::Migration
 
       t.string :title
       t.text :description
+      t.string :poster
       t.integer :rating
       t.integer :trailer_id
       t.integer :imdb

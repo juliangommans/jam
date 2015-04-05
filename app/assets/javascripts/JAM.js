@@ -66,31 +66,58 @@ var j= 0;
   }
     
     
-    function PostSearch(){
-        var terms = $('#query').val();
-        $('.mySearch').children().remove();
-        $('#query').val("");
-        if (terms === "" || terms === null) {
-            alert('Please enter a valid search item!');
-        }
-        else {
-            $(function () {
-                $.getJSON( "http://www.omdbapi.com/?t="+terms+"&y=&plot=short&r=json")
-                  .done(function (data) {
-                        $('.mySearch').append('<h3 style="color:blue"><strong>'+data.Title+'</strong></h3>') 
-                        $('.mySearch').append('<li>'+data.Year+'</li>');
-                        $('.mySearch').append('<li>'+data.Plot+'</li>');
-                        $('.mySearch').append('<li>'+data.imdbRating+'</li>');
-                        //$('.mySearch').append('<br><img src="'+data.Poster+'">');
-                        $('.mySearch h3').on('click', function() {
-                            currentMovie = data;
-                            var imdbN = (data.imdbID).substring(2);
-                            IMDBtrailer(imdbN);
-                        });
-                  });
-            });
-        }
-    }
+  function PostSearch(){
+
+      $('.movie-link').children().remove();
+      var terms = document.getElementById("query").value;
+      if(terms===''){
+        alert("please enter something in the search field")
+      }else{
+        popup('popUpDiv');
+        $.getJSON("/search/" + terms)
+        .done(function (data) {
+          searchedMovies = [];
+          var movies = data.movies
+          for(var i=0;i<movies.length;i++){
+            searchedMovies[i] = movies[i] 
+            $('#a'+i+'').append('<img src="'+movies[i].posters.profile+'"><p>'+movies[i].title+'</p>')   
+
+          }
+            $('.movie-link').on('click', function(e) {
+                   e.preventDefault();
+                    var index = $(this).attr('id').replace(/a/,'')
+                    console.log(index)
+                    imdb = movies[index].alternate_ids.imdb;
+                    IMDBtrailer(imdb);
+              });
+        });
+      }
+    };
+    // function PostSearch(){
+    //     var terms = $('#query').val();
+    //     $('.mySearch').children().remove();
+    //     $('#query').val("");
+    //     if (terms === "" || terms === null) {
+    //         alert('Please enter a valid search item!');
+    //     }
+    //     else {
+    //         $(function () {
+    //             $.getJSON( "http://www.omdbapi.com/?t="+terms+"&y=&plot=short&r=json")
+    //               .done(function (data) {
+    //                     $('.mySearch').append('<h3 style="color:blue"><strong>'+data.Title+'</strong></h3>') 
+    //                     $('.mySearch').append('<li>'+data.Year+'</li>');
+    //                     $('.mySearch').append('<li>'+data.Plot+'</li>');
+    //                     $('.mySearch').append('<li>'+data.imdbRating+'</li>');
+    //                     //$('.mySearch').append('<br><img src="'+data.Poster+'">');
+    //                     $('.mySearch h3').on('click', function() {
+    //                         currentMovie = data;
+    //                         var imdbN = (data.imdbID).substring(2);
+    //                         IMDBtrailer(imdbN);
+    //                     });
+    //               });
+    //         });
+    //     }
+    // }
 
     function AddList() {
         if(currentMovie.title){
