@@ -86,7 +86,6 @@ var j= 0;
             $('.movie-link').on('click', function(e) {
                    e.preventDefault();
                     var index = $(this).attr('id').replace(/a/,'')
-                    console.log(index)
                     imdb = movies[index].alternate_ids.imdb;
                     IMDBtrailer(imdb);
               });
