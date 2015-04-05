@@ -1,6 +1,7 @@
 <h1>This will be covered up by the header at the moment.</h1>
 <h2>Moviejams for <%= current_user.name %></h2>
 <h3>(<%= current_user.email %>)</h3>
+<%= link_to "Change your password", edit_user_registration_path %>
 <h4>Your unwatched moviejams</h4>
 <ul>
   <% if @moviejams[0].empty? %>
