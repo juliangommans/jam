@@ -121,6 +121,9 @@ var j= 0;
 
     function AddList() {
         if(currentMovie.title){
+          $.getJSON("/add/" + currentMovie.title)
+        //   .done(function (data) {
+        // })
             $('.myList').append('<li id='+j+'>'+currentMovie.title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>'); }
         else { $('.myList').append('<li id='+j+'>'+currentMovie.Title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>'); }
 
