@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   get '/upcoming' => 'movies#upcoming', as: 'movie_upcoming'
 
   get '/add/:id' => 'moviejams#add', as: 'add_movie'
-  get '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
-  get '/watched/:id' => 'moviejams#watched', as: 'watch_movie'
+  post '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
+  post '/watched/:id' => 'moviejams#watched', as: 'watch_movie'
 
   root 'movies#index'
 
