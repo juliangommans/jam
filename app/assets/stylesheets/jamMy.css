@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .headFix {
@@ -50,12 +51,46 @@ html, body {
   text-decoration: none;
 }
 
-.jumbotron {
-    height:150px;
-    background-color: #BCDFE6;
+div.jumbotron {
+    height:225px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: white;
+    background-color: rgba(255,255,255,0.5);
+    border: 1px solid black;
+    text-align:center;
     
 }
+div.jumbotron .black {
+    background-color:black;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
 
+div.jumbotron h3 {
+    font-family: 'Dancing Script', cursive;  
+   opacity: 1;
+    font-size: 60px;
+    margin-bottom: 20px;
+    color:yellow;
+}
+
+div.jumbotron h4 {
+    opacity: 1;
+    font-size: 20px;
+}
+
+#homeLink a {
+    font-family: 'Dancing Script', cursive;
+    font-size: 50px;
+    color: yellow;
+    padding-bottom:10px;
+    font-weight: bold;
+    text-decoration: none;
+    
+}
 
 #blanket {
    background-color:#111;
@@ -79,4 +114,6 @@ html, body {
 }
 
 #popUpDiv a {position:relative; top:20px; left:20px}
+
+
 
