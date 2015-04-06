@@ -76,10 +76,22 @@ div.jumbotron {
     text-align:center;
     
 }
-div.jumbotron .black {
+div.black {
     background-color:black;
     padding-bottom: 5px;
     border-radius: 5px;
+}
+
+.mypage {
+    margin: 3%;
+    color: white;
+    opacity: 0.9;
+}
+
+.mypage h3 {
+    font-family: 'Dancing Script', cursive;  
+    color: yellow;
+    font-size: 50px;
 }
 
 div.jumbotron h3 {
@@ -174,7 +186,4 @@ div.jumbotron h4 {
 
 #popUpDiv a {position:relative; top:20px; left:20px}
 
-.mypage p {
-    font-size: 12px;
-}
 
