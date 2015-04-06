@@ -64,7 +64,6 @@ var found;
          LoadTrailer(data);
          if(currentMovie.synopsis){
                 $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
-          else { $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.Plot+'</p>'); }
         $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
     });  
   }
@@ -139,23 +138,32 @@ var found;
   };
 
   function UpdateList(){
-    for (var i=0;i<movieList.length;i++){
-      $.getJSON("/add/" + movieList[i].title)
-    }
-    movieList = [];
-    window.location = "http://localhost:3000/moviejams"
+
+    $.ajax({
+      url: "/add",
+      type: "POST",
+      datatype: "json",
+      data: movieList
+      .done(function (data) {
+        movieList = [];
+        window.location = "http://localhost:3000/moviejams"
+      })
+    })
   }
 
   function AddList() {
     doubleCheck()
+    console.log(currentMovie)
     if (found === true){
       alert("This movie has already been added to your list.")}
       else{
     $('.myList').children().remove();
     $('.myList').append('<input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     movieList.push(currentMovie);
+    $('#addList').remove();
+    $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
-        $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
+        $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'"><img src="'+movieList[i].posters.profile+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
           $('.remove').off('click');
           $('.remove').on("click",function(e){
             e.preventDefault;
