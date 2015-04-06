@@ -91,6 +91,7 @@ var found;
                    e.preventDefault();
                     var index = $(this).attr('id').replace(/a/,'')
                     imdb = movies[index].alternate_ids.imdb;
+                    currentMovie = movies[index];
                     IMDBtrailer(imdb);
               });
         });
