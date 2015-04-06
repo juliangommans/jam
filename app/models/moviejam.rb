@@ -14,4 +14,24 @@ class Moviejam < ActiveRecord::Base
     end
     return [unwatched,watched]
   end
+
+  def self.sort_admindata(users,mjs)
+    admindata = []
+    users.each do |user|
+      watched = 0
+      unwatched = 0
+      mjs.each do |mj|
+        if user.id == mj.user_id
+          if mj.watched
+            watched += 1
+          else
+            unwatched += 1
+          end
+        end
+      end
+      admindata << [user, unwatched, watched]
+    end
+    return admindata
+  end
+
 end
