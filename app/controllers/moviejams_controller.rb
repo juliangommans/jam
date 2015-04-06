@@ -2,7 +2,7 @@ class MoviejamsController < ApplicationController
 
 	def add
     redirect_to new_user_session_path unless user_signed_in?
-    movie = Movie.find_by(title: params[:id])
+    movie = find_movie(params[:id])
     if !check_db(movie.id)
       j = Moviejam.new
       j.movie_id = movie.id
@@ -36,12 +36,24 @@ class MoviejamsController < ApplicationController
     @moviejams = Moviejam.sort_moviejams(@moviejams) #.json ? eventually
   end
 
+  def movie_list
+    movie = find_movie(params[:id])
+    movie_exists = false
+    if check_db(movie.id)
+      movie_exists = true
+    end
+    render json: movie_exists
+  end
+
+  def find_movie(movie)
+    Movie.find_by(title: movie)
+  end
+
   def admin
     redirect_to new_user_session_path unless user_signed_in? and current_user.admin?
     users = User.all
     moviejams = Moviejam.all
     @admindata = Moviejam.sort_admindata(users, moviejams)
-
   end
 
   def check_db(movie)

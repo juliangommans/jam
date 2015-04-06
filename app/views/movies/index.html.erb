@@ -1,32 +1,50 @@
+<script>
+    // var background = [
+    // "http://hdnextyear.com/wp-content/uploads/2015/02/hd-despicable-me-wallpapers-amp-desktop-backgrounds-movie-wallpapers-desktop-images-desktop-wallpapers.jpg",
+    // "http://www.yee7.com/wallpaper/hd/hd-wallpapers-movieshd-movies-iron-man-superhero-hd-movie-wallpapers-1920x1080-for-mobile-1080p-android-laptop-windows-7-mac-1366x768-wallpaper-iphone-nature.jpg",
+    // "http://wallpapersko.com/wp-content/uploads/2014/08/avengers-movie-wallpaper.jpg",
+    // "http://cdn.desktopwallpapers4.me/wallpapers/cartoons/1920x1200/3/21516-scrat-ice-age-1920x1200-cartoon-wallpaper.jpg",
+    // "http://www.designbolts.com/wp-content/uploads/2013/06/man_of_steel-HD-Wallpaper1.jpg"
+    // ];
+    // var index = Math.floor((Math.random() * 5) + 1);
+    //$(document).ready(function(){
+        //$('body').css({"background-image":"url("+background[index]+")"});
+      //$('body').css({"background-image":"url(http://wallpapersko.com/wp-content/uploads/2014/08/avengers-movie-wallpaper.jpg)"});
+    //});
+</script>
+
 <div class="jumbotron">
-    <h3>Just Another Movie!</h3>
-    <h4>Welcome <%= current_user.name %>. What movie will you JAM tonight?</h4>
+    <div class="black">
+        <h3>Just Another Movie!</h3>
+        <h4>Welcome <%= current_user.name %>, what movie will you JAM tonight?</h4>
+    </div>
 </div>
 <div class="row">
-    <div class="col-md-9">
-        <div class="row">
+    <div class="col-md-9 whiteNoise">
             <h2>Upcoming Movies</h2>
-            <div class="upcoming" ></div>
-        </div><br>
-        
+            <div class="row upcoming" ></div>
+    </div>
+    <div class="whiteNoise stick-to-right">
+        <h2 class="">My Movie JAM</h2>
+        <div class="myList"></div>
+    </div>
+</div>
+    <div class="row">
         <p class="synopsis"></p>
         <div class="viewTrailer"></div>
+    </div>
 
-        <div class="row">
+        <div class="row whiteNoise search">
             <div class="search">
                 <h2 >My Movie Search</h2>
                 <input type="text"  id="query" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()" />
                 <input type="button"  id="btnSearch" value="Search" onclick="PostSearch();" /><br><br>
                 <div class="mySearch"></div>
             </div>
-        </div><br>
+        </div><br><br>
         
     </div>
-    <br><div class="col-md-3">
-        <h2 class="">My Movie JAM</h2>
-        <div class="myList"></div>
 
-    </div>
 </div><br>
 
 

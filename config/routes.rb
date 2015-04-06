@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/mytrailer/:imdb' => 'movies#mytrailer', as: 'movie_mytrailer'
   get '/upcoming' => 'movies#upcoming', as: 'movie_upcoming'
 
+  get '/movie_list/:id' => 'moviejams#movie_list', as: 'movie_list'
   get '/admin' => 'moviejams#admin', as: 'admin'
   get '/add/:id' => 'moviejams#add', as: 'add_movie'
   post '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
