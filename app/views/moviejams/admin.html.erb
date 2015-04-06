@@ -1,25 +1,32 @@
 <div class="headFix">
-<h2>Registered users</h2>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>email</th>
-    <th>Role</th>
-    <th>Unwatched</th>
-    <th>Watched</th>
-  </tr>
-<% @admindata.each do |user| %>
-  <tr>
-    <td><%= user[0].name %></td>
-    <td><%= user[0].email %></td>
-    <% if user[0].admin? %>
-      <td>Admin</td>
-    <% else %>
-      <td>User</td>
-    <% end %>
-    <td><%= user[1] %></td>
-    <td><%= user[2] %></td>
-  </tr>
-<% end %>
-</table>
-</div>
+  
+   <div class="jumbotron mypage">
+    <div class="black">
+      <div class="table">
+      <h4>Registered users</h4>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>email</th>
+          <th>Role</th>
+          <th>Unwatched</th>
+          <th>Watched</th>
+        </tr>
+      <% @admindata.each do |user| %>
+        <tr>
+          <td><%= user[0].name %></td>
+          <td><%= user[0].email %></td>
+          <% if user[0].admin? %>
+            <td>Admin</td>
+          <% else %>
+            <td>User</td>
+          <% end %>
+          <td><%= user[1] %></td>
+          <td><%= user[2] %></td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+  </div>
+  </div>
+  </div>

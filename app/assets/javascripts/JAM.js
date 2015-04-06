@@ -148,7 +148,8 @@ var found;
     $('.myList').children().remove();
     $('.myList').append('<input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     movieList.push(currentMovie);
-    $('#addList').html('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
+    $('#addList').remove();
+    $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
           $('.remove').off('click');
