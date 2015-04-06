@@ -160,7 +160,7 @@ var found;
     }
     setTimeout(function() {
     $('.myList').children().remove();
-    $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='http://localhost:3000/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
+    $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
   }, 1000);
   }
 
