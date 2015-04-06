@@ -36,6 +36,14 @@ class MoviejamsController < ApplicationController
     @moviejams = Moviejam.sort_moviejams(@moviejams) #.json ? eventually
   end
 
+  def admin
+    redirect_to new_user_session_path unless user_signed_in? and current_user.admin?
+    users = User.all
+    moviejams = Moviejam.all
+    @admindata = Moviejam.sort_admindata(users, moviejams)
+
+  end
+
   def check_db(movie)
     Moviejam.find_by(user_id: current_user, movie_id: movie)
   end
