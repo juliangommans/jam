@@ -42,7 +42,6 @@ var found;
                upcomingMovie[i] = data.movies[i];
               $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p>');
             }
-        
          $('.poster').on('click', function(e) {
            e.preventDefault();
            $('.poster').removeClass('active');
@@ -64,7 +63,7 @@ var found;
          LoadTrailer(data);
          if(currentMovie.synopsis){
                 $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
+        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>')
     });  
   }
     
@@ -128,32 +127,45 @@ var found;
     movieList.splice(movie[0],1);
   };
 
-  function doubleCheck(){
-    found = false;
+  function DoubleCheck(movie){
     for(var i = 0; i < movieList.length; i++) {
-      if (movieList[i].title == currentMovie.title) {
+      if (movieList[i].title == movie.title) {
         found = true;
       break;
-    }}
+      }
+    }
   };
 
-  function UpdateList(){
-
-    $.ajax({
-      url: "/add",
-      type: "POST",
-      datatype: "json",
-      data: movieList
+  function CheckDB(){
+    found = false;
+    $.getJSON("/movie_list/" + currentMovie.title)
       .done(function (data) {
-        movieList = [];
-        window.location = "http://localhost:3000/moviejams"
+        if(data === true){
+          found = true}
+          AddList();
+      });
+  }
+
+  function UpdateList(){
+    for (var i=0;i<movieList.length;i++){
+      $.ajax({
+        url: "/add/" + movieList[i].title,
+        type: "GET",
+        success: function(data,status){
+          for (var z=0;z<movieList.length;z++){
+            Remove(movieList[z].alternate_ids.imdb)
+          }
+        }
       })
-    })
+    }
+    setTimeout(function() {
+    $('.myList').children().remove();
+    $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='http://localhost:3000/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
+  }, 1000);
   }
 
   function AddList() {
-    doubleCheck()
-    console.log(currentMovie)
+    DoubleCheck(currentMovie)
     if (found === true){
       alert("This movie has already been added to your list.")}
       else{
@@ -186,5 +198,7 @@ var found;
     }
     return array;
   }
+
+
 
 
