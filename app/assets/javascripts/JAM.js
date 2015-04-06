@@ -1,9 +1,10 @@
 $(document).ready(function(){
 
+   
+      $('body').css({"background-image":"url(http://wallpapersko.com/wp-content/uploads/2014/08/avengers-movie-wallpaper.jpg)"});
+   
     Upcoming();
     FeatureTrailer();
-
-
         
  });
  
@@ -63,7 +64,7 @@ var found;
          LoadTrailer(data);
          if(currentMovie.synopsis){
                 $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>')
+              $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>')
     });  
   }
     
@@ -95,31 +96,6 @@ var found;
         });
       }
     };
-    // function PostSearch(){
-    //     var terms = $('#query').val();
-    //     $('.mySearch').children().remove();
-    //     $('#query').val("");
-    //     if (terms === "" || terms === null) {
-    //         alert('Please enter a valid search item!');
-    //     }
-    //     else {
-    //         $(function () {
-    //             $.getJSON( "http://www.omdbapi.com/?t="+terms+"&y=&plot=short&r=json")
-    //               .done(function (data) {
-    //                     $('.mySearch').append('<h3 style="color:blue"><strong>'+data.Title+'</strong></h3>') 
-    //                     $('.mySearch').append('<li>'+data.Year+'</li>');
-    //                     $('.mySearch').append('<li>'+data.Plot+'</li>');
-    //                     $('.mySearch').append('<li>'+data.imdbRating+'</li>');
-    //                     //$('.mySearch').append('<br><img src="'+data.Poster+'">');
-    //                     $('.mySearch h3').on('click', function() {
-    //                         currentMovie = data;
-    //                         var imdbN = (data.imdbID).substring(2);
-    //                         IMDBtrailer(imdbN);
-    //                     });
-    //               });
-    //         });
-    //     }
-    // }
 
   function Remove(id) {
     $('#'+id+'').remove();
@@ -172,10 +148,9 @@ var found;
     $('.myList').children().remove();
     $('.myList').append('<input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     movieList.push(currentMovie);
-    $('#addList').remove();
-    $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
+    $('#addList').html('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
-        $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'"><img src="'+movieList[i].posters.profile+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
+        $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
           $('.remove').off('click');
           $('.remove').on("click",function(e){
             e.preventDefault;
