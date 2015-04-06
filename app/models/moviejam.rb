@@ -34,4 +34,14 @@ class Moviejam < ActiveRecord::Base
     return admindata
   end
 
+  def self.filter_featuredata(movie,mjs)
+    featuredata = []
+    mjs.each do |mj|
+      if movie.id == mj.movie_id
+        featuredata << mj
+      end
+    end
+    return featuredata
+  end
+
 end
