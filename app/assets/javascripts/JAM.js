@@ -2,6 +2,8 @@ $(document).ready(function(){
 
     Upcoming();
     FeatureTrailer();
+
+
         
  });
  
@@ -9,6 +11,8 @@ var upcomingMovie = [];
 var currentMovie = "";
 var imdb = "";
 var j= 0;
+var movieList = [];
+var found;
 
 
     function FeatureTrailer() {
@@ -52,17 +56,17 @@ var j= 0;
       });
     }
     
-    function IMDBtrailer(imdb) {
-        $('.viewTrailer').children().remove();
- 
-        $.getJSON("/mytrailer/" + imdb)
-          .done(function (data) {
-             LoadTrailer(data);
-             if(currentMovie.synopsis){
-                    $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
-              else { $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.Plot+'</p>'); }
-            $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
-          });  
+  function IMDBtrailer(imdb) {
+    $('.viewTrailer').children().remove();
+
+    $.getJSON("/mytrailer/" + imdb)
+      .done(function (data) {
+         LoadTrailer(data);
+         if(currentMovie.synopsis){
+                $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
+          else { $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.Plot+'</p>'); }
+        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>')
+    });  
   }
     
     
@@ -118,22 +122,48 @@ var j= 0;
     //     }
     // }
 
-    function AddList() {
-        if(currentMovie.title){
-          $.getJSON("/add/" + currentMovie.title)
-        //   .done(function (data) {
-        // })
-            $('.myList').append('<li id='+j+'>'+currentMovie.title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>'); }
-        else { $('.myList').append('<li id='+j+'>'+currentMovie.Title+'  <input type="button"  id="remove" value="X" onclick="Remove();" /></li>'); }
+  function Remove(id) {
+    $('#'+id+'').remove();
+    var movie = $.grep(movieList, function(e){ return e.alternate_ids.imdb == id; });
+    movieList.splice(movie[0],1);
+  };
 
-    }
-    
-    function Remove() {
-        $('#remove').click(function(){
-            $(this).closest('li').remove();
-        });
+  function doubleCheck(){
+    found = false;
+    for(var i = 0; i < movieList.length; i++) {
+      if (movieList[i].title == currentMovie.title) {
+        found = true;
+      break;
+    }}
+  };
 
+  function UpdateList(){
+    for (var i=0;i<movieList.length;i++){
+      $.getJSON("/add/" + movieList[i].title)
     }
+    movieList = [];
+    window.location = "http://localhost:3000/moviejams"
+  }
+
+  function AddList() {
+    doubleCheck()
+    if (found === true){
+      alert("This movie has already been added to your list.")}
+      else{
+    $('.myList').children().remove();
+    $('.myList').append('<input type="button" class="update" value="Update" onclick="UpdateList();"/>');
+    movieList.push(currentMovie);
+      for(var i=0;i<movieList.length;i++){
+        $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
+          $('.remove').off('click');
+          $('.remove').on("click",function(e){
+            e.preventDefault;
+            Remove($(this).parent().attr("id"));
+          })
+      }}
+  }
+
+
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
@@ -147,4 +177,5 @@ var j= 0;
     }
     return array;
   }
+
 
