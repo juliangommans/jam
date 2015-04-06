@@ -1,0 +1,7 @@
+<h1><%= @featuredata[:movie].title %></h1>
+<h1><%= @featuredata[:movie].title %></h1>
+<ul>
+  <% @featuredata[:moviejams].each do |mj| %>
+  <li><%= mj.user.name %></li>
+  <% end %>
+</ul>
