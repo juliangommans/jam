@@ -8,6 +8,8 @@
     <%= csrf_meta_tags %>
 </head>
 <body>
+     <div id="fb-root"></div>
+  
      <div id="blanket" style="display:none;"></div>
                     <div id="popUpDiv" style="display:none;">
                       <table>
@@ -53,7 +55,7 @@
   <div class="container body-content">
          <%= yield %>
       <footer class="footer">
-        <p><%= Time.now.strftime("%m/%d/%Y %I:%M%p")%><strong> Team JAM-mer's Jullian Gommans, Sandra Muller, Steven Brown</strong></p>
+        <p><%= Time.now.strftime("%m/%d/%Y %I:%M%p")%><strong>Team JAM-mer's Jullian Gommans, Sandra Muller, Steven Brown</strong><div class="fb-like" data-href="http://moviejam.herokuapp.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></p>
       </footer>
   </div>
 </body>

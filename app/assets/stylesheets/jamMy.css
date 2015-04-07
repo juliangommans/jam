@@ -139,7 +139,7 @@ div.jumbotron h4 {
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 5%;
 }
 
 .upcoming {
@@ -244,6 +244,11 @@ td {
 .remove{
     color: yellow;
     font-weight:normal;
+}
+
+.fb-like {
+    color:white;
+    font-weight:bold;
 }
 
 #missing {

@@ -1,10 +1,3 @@
-$(document).ready(function(){
-
-    Upcoming();
-    FeatureTrailer();
-
- });
- 
 var upcomingMovie = [];
 var currentMovie;
 var imdb = "";
@@ -23,6 +16,7 @@ var movie;
     }
     
     function LoadTrailer(data) {
+      debugger
       $('.viewTrailer').children().remove();
       $('.viewTrailer').append('<h2><strong>'+data.title+'</strong></h2>');
       $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
@@ -54,7 +48,11 @@ var movie;
   function AppendInfo(){
     $('.viewTrailer').children().remove();
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
+<<<<<<< HEAD
+    $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
+=======
     $('.viewTrailer').append('<h1 id="missing"><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
+>>>>>>> a62175c3b84a8c159fd7ee22464a7e83f0f7e6b9
     CurrentMoviePlot(currentMovie);
   }
 
@@ -72,6 +70,17 @@ var movie;
       //   $('.viewTrailer').append('<p> unfortunately we could not find a description for this movie</p>');
       //   $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
       // })
+  }
+  
+  function IMDBFeaturePage(imdb) {
+    $('.viewTrailer').children().remove();
+    $.getJSON("/mytrailer/" + imdb)
+    .done(function (data) {
+       $('.viewTrailer').append('<p>'+data.embed+'</p>')
+    })
+    .fail(function(data) {
+      $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
+    })
   }
 
   function IMDBtrailer(imdb) {
