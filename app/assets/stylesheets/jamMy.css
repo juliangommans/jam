@@ -165,7 +165,7 @@ div.jumbotron h4 {
     position:absolute;
     background-color: white;
     color: black;
-    width:400px;
+    width:450px;
     height:auto;
     border:2px solid black;
     z-index: 9002;
@@ -176,5 +176,9 @@ div.jumbotron h4 {
 
 .mypage p {
     font-size: 12px;
+}
+
+td {
+    width: 200px;
 }
 

@@ -49,14 +49,21 @@ var found;
             imdb = upcomingMovie[index].alternate_ids.imdb;
             currentMovie = upcomingMovie[index];
             IMDBtrailer(imdb);
-     
         });
-
       });
     }
     
+  function AppendInfo(){
+    $('.viewTrailer').children().remove();
+    $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
+    $('.viewTrailer').append('<h1><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
+    $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>');
+    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+  }
+
   function IMDBtrailer(imdb) {
     $('.viewTrailer').children().remove();
+    console.log(imdb)
     $.getJSON("/mytrailer/" + imdb)
     .done(function (data) {
       LoadTrailer(data);
@@ -65,16 +72,8 @@ var found;
         $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
     })
     .fail(function(data) {
-
-     
-        $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
-        $('.viewTrailer').append('<h1><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
-        $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>');
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
-
+      AppendInfo();
     })
-        
-
   }
     
     
@@ -96,9 +95,14 @@ var found;
           $('.movie-link').on('click', function(e) {
             e.preventDefault();
             var index = $(this).attr('id').replace(/a/,'')
-            imdb = movies[index].alternate_ids.imdb;
             currentMovie = movies[index];
-            IMDBtrailer(imdb);
+            console.log(movies[index].alternate_ids)
+              if (movies[index].alternate_ids === undefined){
+                AppendInfo();
+              } else {
+                imdb = movies[index].alternate_ids.imdb;
+                IMDBtrailer(imdb);
+              }
           });
       });
       }
@@ -106,7 +110,7 @@ var found;
 
   function Remove(id) {
     $('#'+id+'').remove();
-    var movie = $.grep(movieList, function(e){ return e.alternate_ids.imdb == id; });
+    var movie = $.grep(movieList, function(e){ return e.id == id; });
     movieList.splice(movie[0],1);
   };
 
@@ -158,7 +162,7 @@ var found;
     $('#addList').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
-        $('.myList').append('<li id="'+movieList[i].alternate_ids.imdb+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
+        $('.myList').append('<li id="'+movieList[i].id+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
           $('.remove').off('click');
           $('.remove').on("click",function(e){
             e.preventDefault;
