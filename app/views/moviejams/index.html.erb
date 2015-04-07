@@ -15,7 +15,7 @@
                 <% else %>
                   <% @moviejams[0].each do |moviejam| %>
                       <p><%= moviejam.movie.title %></p>
-                       - your prewatch rating: <%= moviejam.prerating %>
+                       - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : '*' * moviejam.prerating %>)
                       <div class="removebtn"><%= button_to "Remove", {:controller => "moviejams", :action => 'remove', :id => moviejam.id }, :method => :post %></div>
                       <div class="watchbtn"><%= button_to "Watch", {:controller => "moviejams", :action => 'watched', :id => moviejam.id }, :method => :post %></div>
                       <br>
@@ -30,7 +30,7 @@
                 <% else %>
                   <% @moviejams[1].each do |moviejam| %>
                    <p style="padding-top: 5px"><%= moviejam.movie.title %></p>
-                       - your prewatch rating: <%= moviejam.prerating %> - your postwatch rating: <%= moviejam.postrating %>
+                       - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : '*' * moviejam.prerating %>) - your after rating: (<%= moviejam.postrating < 0 || moviejam.postrating > 5 ? 'unrated' : '*' * moviejam.postrating %>)
                   <br>
                   <% end %>
                 <% end %>
