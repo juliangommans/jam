@@ -1,6 +1,6 @@
-class CreateMovies < ActiveRecord::Migration
+class CreateUpcomingMovies < ActiveRecord::Migration
   def change
-    create_table :movies do |t|
+    create_table :upcomingmovies do |t|
       t.string :title
       t.text :description
       t.string :poster

@@ -7,7 +7,6 @@ $(document).ready(function(){
  
 var upcomingMovie = [];
 var currentMovie;
-var movieScores = [];
 var imdb = "";
 var j= 0;
 var movieList = [];
@@ -31,20 +30,20 @@ var found;
     
     function Upcoming() {
       $('.upcoming').children().remove();
-      $.getJSON("/upcoming")
+      $.getJSON("/index/upcoming")
         .done(function (data) {
-          shuffle(data.movies);
+          shuffle(data);
           upcomingMovie = [];
           for(var i = 0; i < 10; i++){
-               upcomingMovie[i] = data.movies[i];
-              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].posters.profile+'"><p>'+upcomingMovie[i].title+'</p>');
+               upcomingMovie[i] = data[i];
+              $('.upcoming').append('<div class="col-md-1 poster" id="'+i+'"><img src="'+upcomingMovie[i].poster+'"><p>'+upcomingMovie[i].title+'</p>');
             }
          $('.poster').on('click', function(e) {
            e.preventDefault();
            $('.poster').removeClass('active');
            $(this).addClass('active');
            var index = $(this).attr('id');
-            imdb = upcomingMovie[index].alternate_ids.imdb;
+            imdb = upcomingMovie[index].imdb;
             currentMovie = upcomingMovie[index];
             IMDBtrailer(imdb);
         });
@@ -62,14 +61,13 @@ var found;
     $.getJSON("/find/" + movie.title)
       .done(function (data) {
         $('.viewTrailer').append('<p style="text-align:justify">'+data.description+'</p>');
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
       })
       .fail(function(data) {
-        $('.viewTrailer').append('<select id="movieScore" onchange=="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
+        console.log(data)
+        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
       })
   }
-
-
 
   function IMDBtrailer(imdb) {
     $('.viewTrailer').children().remove();
@@ -87,7 +85,7 @@ var found;
   function PostSearch(){
     $('.movie-link').children().remove();
     var terms = document.getElementById("query").value;
-    if(terms===''){
+    if(terms === ''){
       alert("please enter something in the search field")
     }else{
       popup('popUpDiv');
@@ -130,7 +128,8 @@ var found;
   };
 
   function CheckDB(score){
-    if (score===""){
+    console.log(score)
+    if (score === ""){
       alert("Please select a score before adding your movie")
     } else {
     found = false;
@@ -141,28 +140,29 @@ var found;
           UserPreRating(score);
       });
     }
-  }
+  } 
 
-  function UserPreRating(score)
-    movieScores.push({"title": currentMovie.title,"score": score});
+  function UserPreRating(score) {
+    console.log(score)
+    currentMovie["pre_rating"] = score
     $('#movieScore').remove();
     $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>');
   }
 
   function UpdateList(){
-    for (var i=0;i<movieScores.length;i++){
+    for (var i=0;i<movieList.length;i++){
       $.ajax({
-        url: '/add/"' + movieScores[i].score +'"/' +movieScores[i].title,
+        url: '/add/' + movieList[i].pre_rating +'/' +movieList[i].title,
         type: "GET",
         success: function(data,status){
-            for (var z=0;z<movieList.length;z++){
-              Remove(movieList[z].alternate_ids.imdb)
-          }
+              for (var z=0;z<movieList.length;z++){
+                Remove(movieList[z].alternate_ids.imdb)
+              }
+            }
+          })
         }
-      })
-    }
+    
     setTimeout(function() {
-    movieScores = [];
     $('.myList').children().remove();
     $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
   }, 1000);
