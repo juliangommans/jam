@@ -145,7 +145,7 @@ div.jumbotron h4 {
     float: right;
     padding-bottom: 10px;
 }
-table {
+.main-table {
     font-size: 12px;
     margin-left:auto;
     margin-right:auto;
