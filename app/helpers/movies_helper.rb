@@ -33,6 +33,23 @@ module MoviesHelper
       return data.strip
     end
 
+    def self.check_description(movies)
+      movies.each do |movie|
+        tester = check_db(movie["title"])
+        if tester.description == '' || tester.description == nil
+          terms = movie["title"].split(' ').slice(0,4)
+          new_description = search_omdb(terms.join('+'))
+          tester.update(description: new_description["Plot"])
+        end
+      end
+    end
+
+    def self.search_omdb(movie)
+      terms = movie.gsub(':','%3A')
+      data = HTTParty.get('http://www.omdbapi.com/?t='+terms+'&y=&plot=full&r=json')
+      return data
+    end
+
     def self.check_db(movie)
       Movie.find_by(title: movie)
     end
@@ -52,6 +69,7 @@ module MoviesHelper
           end
         end
       end
+      check_description(movies)
     end
 
   end
