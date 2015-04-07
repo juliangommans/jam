@@ -54,19 +54,24 @@ var movie;
   function AppendInfo(){
     $('.viewTrailer').children().remove();
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
-    $('.viewTrailer').append('<h1><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
+    $('.viewTrailer').append('<h1 id="missing"><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
     CurrentMoviePlot(currentMovie);
   }
 
   function CurrentMoviePlot(movie){
     $.getJSON("/find/" + movie.title)
       .done(function (data) {
-        $('.viewTrailer').append('<p style="text-align:justify">'+data.description+'</p>');
+        if (data.description == null){
+          $('.viewTrailer').append('<p> Unfortunately we could not find a description for this movie</p>');
+        } else {
+          $('.viewTrailer').append('<p style="text-align:justify">'+data.description+'</p>');
+        }
         $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
       })
-      .fail(function(data) {
-        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
-      })
+      // .fail(function(data) {
+      //   $('.viewTrailer').append('<p> unfortunately we could not find a description for this movie</p>');
+      //   $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
+      // })
   }
 
   function IMDBtrailer(imdb) {
@@ -181,7 +186,8 @@ var movie;
     $('.myList').children().remove();
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
-    $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
+    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
+    $('.viewTrailer').append('<p>You have successfully added this movie to your (temporary) list, please click "update" to permanently save them.</p>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
           $('.remove').off('click');
@@ -190,7 +196,7 @@ var movie;
             Remove($(this).parent().attr("id"));
           })
       }}
-   $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
+   
   }
 
   function shuffle(array) {

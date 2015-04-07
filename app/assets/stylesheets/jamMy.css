@@ -245,3 +245,7 @@ td {
     color: yellow;
     font-weight:normal;
 }
+
+#missing {
+    color:white;
+}
