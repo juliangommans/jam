@@ -53,7 +53,7 @@ var found;
   function AppendInfo(){
     $('.viewTrailer').children().remove();
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
-    $('.viewTrailer').append('<h1><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
+    $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
     CurrentMoviePlot(currentMovie);
   }
 
