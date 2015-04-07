@@ -8,7 +8,7 @@ class MoviejamsController < ApplicationController
       j.movie_id = movie.id
       j.user_id = current_user.id
       j.watched = false
-      j.prerating = rand(0..100)
+      j.prerating = -1 # i.e. no rating yet
       j.save
     end
     redirect_to moviejams_path
@@ -25,7 +25,7 @@ class MoviejamsController < ApplicationController
     redirect_to new_user_session_path unless user_signed_in?
     @moviejam = Moviejam.find(params[:id])
     @moviejam.watched = true
-    @moviejam.postrating = rand(0..100)
+    @moviejam.postrating = -1 # i.e. no rating yet
     @moviejam.save
     redirect_to moviejams_path
   end
