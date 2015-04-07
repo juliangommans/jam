@@ -28,7 +28,7 @@ module MoviesHelper
 
     def self.search(name)
       terms = name.gsub(' ','+')
-      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+terms+"&page_limit=8")
+      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+terms+"&page_limit=10")
       add_movies(hash(data))
       return data.strip
     end

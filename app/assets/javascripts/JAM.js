@@ -90,7 +90,7 @@ var found;
         var movies = data.movies
         for(var i=0;i<movies.length;i++){
           searchedMovies[i] = movies[i] 
-          $('#a'+i+'').append('<img src="'+movies[i].posters.profile+'"><p>'+movies[i].title+'</p>')   
+          $('#a'+i+'').append('<img class="poster" src="'+movies[i].posters.profile+'"><p class="p-title">'+movies[i].title+'</p>')   
         }
           $('.movie-link').on('click', function(e) {
             e.preventDefault();

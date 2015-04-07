@@ -62,8 +62,10 @@ iframe {
 }
 
 .movie-link {
-  color: white;
+  color: black;
   text-decoration: none;
+  margin: center;
+  text-align: center
 }
 
 div.jumbotron {
@@ -180,5 +182,17 @@ div.jumbotron h4 {
 
 td {
     width: 200px;
+    margin: auto;
 }
 
+.poster {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.p-title {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
