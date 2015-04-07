@@ -164,7 +164,7 @@ var found;
     $('.viewTrailer input').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
-        $('.myList').append('<p id="'+movieList[i].id+'">'+movieList[i].title+'</p><div class="remove">remove<div>');
+        $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
           $('.remove').off('click');
           $('.remove').on("click",function(e){
             e.preventDefault;
