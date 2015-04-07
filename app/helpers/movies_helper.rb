@@ -28,7 +28,7 @@ module MoviesHelper
 
     def self.search(name)
       terms = name.gsub(' ','+')
-      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+terms+"&page_limit=3")
+      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=pavxvfcq6kjfscnvdj6cga6r&q="+terms+"&page_limit=10")
       add_movies(hash(data))
       return data.strip
     end
@@ -45,7 +45,11 @@ module MoviesHelper
     def self.add_movies(movies)
       movies.each do |movie|
         if !check_db(movie["title"])
-          Movie.create(title: movie["title"], description: movie["synopsis"], poster: movie["posters"]["profile"], rating: movie["ratings"]["critics_score"], imdb: movie["alternate_ids"]["imdb"])
+          if movie["alternate_ids"] == nil
+            Movie.create(title: movie["title"], description: movie["synopsis"], poster: movie["posters"]["profile"], rating: movie["ratings"]["critics_score"])
+          else
+            Movie.create(title: movie["title"], description: movie["synopsis"], poster: movie["posters"]["profile"], rating: movie["ratings"]["critics_score"], imdb: movie["alternate_ids"]["imdb"])
+          end
         end
       end
     end
