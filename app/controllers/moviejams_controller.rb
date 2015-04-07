@@ -14,13 +14,6 @@ class MoviejamsController < ApplicationController
     redirect_to moviejams_path
 	end
 
-  # def set_score
-  #   movie = find_movie(params[:title])
-  #   movie_score = check_db(movie.id)
-  #   movie_score.update(prerating: (score.to_i))
-
-  # end
-
   def remove
     redirect_to new_user_session_path unless user_signed_in?
     @moviejam = Moviejam.find(params[:id])
