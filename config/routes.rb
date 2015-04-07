@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   get '/upcoming' => 'movies#upcoming', as: 'movie_upcoming'
   get '/find/:title' => 'movies#find', as: 'movie_find'
 
+  #get '/set/:id/:title' => 'moviejams#set_score', as: 'moviejams_set_score'
   get '/movie_list/:id' => 'moviejams#movie_list', as: 'movie_list'
   get '/admin' => 'moviejams#admin', as: 'admin'
   get '/feature/:id' => 'moviejams#feature', as: 'feature'
-  get '/add/:id' => 'moviejams#add', as: 'add_movie'
+  get '/add/:id/:title' => 'moviejams#add', as: 'add_movie'
   post '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
   post '/watched/:id' => 'moviejams#watched', as: 'watch_movie'
 

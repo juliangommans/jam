@@ -6,7 +6,8 @@ $(document).ready(function(){
  });
  
 var upcomingMovie = [];
-var currentMovie = "";
+var currentMovie;
+var movieScores = [];
 var imdb = "";
 var j= 0;
 var movieList = [];
@@ -64,9 +65,11 @@ var found;
         $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
       })
       .fail(function(data) {
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+        $('.viewTrailer').append('<select id="movieScore" onchange=="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
       })
   }
+
+
 
   function IMDBtrailer(imdb) {
     $('.viewTrailer').children().remove();
@@ -126,29 +129,40 @@ var found;
     }
   };
 
-  function CheckDB(){
+  function CheckDB(score){
+    if (score===""){
+      alert("Please select a score before adding your movie")
+    } else {
     found = false;
     $.getJSON("/movie_list/" + currentMovie.title)
       .done(function (data) {
         if(data === true){
           found = true}
-          AddList();
+          UserPreRating(score);
       });
+    }
+  }
+
+  function UserPreRating(score)
+    movieScores.push({"title": currentMovie.title,"score": score});
+    $('#movieScore').remove();
+    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>');
   }
 
   function UpdateList(){
-    for (var i=0;i<movieList.length;i++){
+    for (var i=0;i<movieScores.length;i++){
       $.ajax({
-        url: "/add/" + movieList[i].title,
+        url: '/add/"' + movieScores[i].score +'"/' +movieScores[i].title,
         type: "GET",
         success: function(data,status){
-          for (var z=0;z<movieList.length;z++){
-            Remove(movieList[z].alternate_ids.imdb)
+            for (var z=0;z<movieList.length;z++){
+              Remove(movieList[z].alternate_ids.imdb)
           }
         }
       })
     }
     setTimeout(function() {
+    movieScores = [];
     $('.myList').children().remove();
     $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
   }, 1000);
@@ -165,6 +179,7 @@ var found;
     $('#addList').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
+        console.log(movieList[i])
         $('.myList').append('<li id="'+movieList[i].id+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
           $('.remove').off('click');
           $('.remove').on("click",function(e){

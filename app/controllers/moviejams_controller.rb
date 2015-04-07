@@ -8,11 +8,18 @@ class MoviejamsController < ApplicationController
       j.movie_id = movie.id
       j.user_id = current_user.id
       j.watched = false
-      j.prerating = rand(-1..5)#-1 i.e. no rating yet
+      j.prerating = params[:id]
       j.save
     end
     redirect_to moviejams_path
 	end
+
+  # def set_score
+  #   movie = find_movie(params[:title])
+  #   movie_score = check_db(movie.id)
+  #   movie_score.update(prerating: (score.to_i))
+
+  # end
 
   def remove
     redirect_to new_user_session_path unless user_signed_in?
