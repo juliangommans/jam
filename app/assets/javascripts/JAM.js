@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-   
-      //$('body').css({"background-image":"url(http://wallpapersko.com/wp-content/uploads/2014/08/avengers-movie-wallpaper.jpg)"});
-   
     Upcoming();
     FeatureTrailer();
         
