@@ -2,13 +2,13 @@ class MoviejamsController < ApplicationController
 
 	def add
     redirect_to new_user_session_path unless user_signed_in?
-    movie = find_movie(params[:id])
+    movie = find_movie(params[:title])
     if !check_db(movie.id)
       j = Moviejam.new
       j.movie_id = movie.id
       j.user_id = current_user.id
       j.watched = false
-      j.prerating = rand(-1..5)#-1 i.e. no rating yet
+      j.prerating = params[:id]
       j.save
     end
     redirect_to moviejams_path
