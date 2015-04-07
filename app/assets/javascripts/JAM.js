@@ -54,19 +54,26 @@ var found;
     $('.viewTrailer').children().remove();
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
     $('.viewTrailer').append('<h1><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
-    $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>');
-    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+    CurrentMoviePlot(currentMovie);
+  }
+
+  function CurrentMoviePlot(movie){
+    $.getJSON("/find/" + movie.title)
+      .done(function (data) {
+        $('.viewTrailer').append('<p style="text-align:justify">'+data.description+'</p>');
+        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+      })
+      .fail(function(data) {
+        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+      })
   }
 
   function IMDBtrailer(imdb) {
     $('.viewTrailer').children().remove();
-    console.log(imdb)
     $.getJSON("/mytrailer/" + imdb)
     .done(function (data) {
       LoadTrailer(data);
-      if(currentMovie.synopsis){
-        $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+      CurrentMoviePlot(currentMovie);
     })
     .fail(function(data) {
       AppendInfo();
@@ -93,7 +100,6 @@ var found;
             e.preventDefault();
             var index = $(this).attr('id').replace(/a/,'')
             currentMovie = movies[index];
-            console.log(movies[index].alternate_ids)
               if (movies[index].alternate_ids === undefined){
                 AppendInfo();
               } else {

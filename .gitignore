@@ -13,4 +13,6 @@
 !/log/.keep
 /tmp
 .c9
+.env
+Procfile
 database.yml
