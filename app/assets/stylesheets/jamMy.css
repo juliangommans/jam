@@ -48,17 +48,22 @@ html, body {
     border-width:1px;
     padding: 20px;
     border-radius: 10px;
-    margin-bottom:30px;
-    background-color: rgba(255,255,255,0.5);
+    margin-bottom:10px;
     color:black;
     font-weight: bold;
     font-size: 16px;
 }
 
-iframe {
+.viewTrailer iframe {
     border-radius: 10px;
     border:2px solid #075876;
     box-shadow: 10px 10px 10px #297995;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.viewTrailer h2 {
+    color: white;
 }
 
 .movie-link {
@@ -79,16 +84,24 @@ div.jumbotron {
     
 }
 .black {
+    width: auto;
+    margin: 2%;
     background-color:black;
     padding-bottom: 5px;
     border-radius: 5px;
+    overflow: auto;
 }
 
 .mypage {
-    margin: 3%;
+    margin: 1%;
     color: white;
     opacity: 0.9;
-    padding: 5px;
+    padding: 10px;
+}
+
+.mypage p {
+    color:white;
+    font-weight:normal;
 }
 
 .mypage h3 {
@@ -125,8 +138,8 @@ div.jumbotron h4 {
     background-color: rgba(255,255,255,0.5);
     border: 1px solid black;
     border-radius: 10px;
-    margin-bottom:20px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .upcoming {
@@ -140,10 +153,11 @@ div.jumbotron h4 {
 }
 
 .stick-to-right {
-    width: 250px;
+    width: 270px;
     height: auto;
     float: right;
     padding-bottom: 10px;
+    padding-right:10px;
 }
 .main-table {
     font-size: 12px;
@@ -157,19 +171,25 @@ div.jumbotron h4 {
 .removebtn, .rightbox {
     float: right;
     margin: 3%;
-    color: black;
     border-radius: 10px;
+    position:relative;
 }
 .watchbtn, .leftbox {
     float: left;
     margin: 3%;
-    color: black;
     border-radius: 10px;
+}
+.removebtn, .watchbtn{
+    color:black;
 }
 td {
    text-align: left;
    padding-left: 10px;
    padding-right:5px;
+}
+button, input {
+    color: black;
+    border-radius: 10px;
 }
 
 #userList {
@@ -219,4 +239,9 @@ td {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.remove{
+    color: yellow;
+    font-weight:normal;
 }

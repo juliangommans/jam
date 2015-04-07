@@ -1,7 +1,38 @@
-<h1><%= @featuredata[:movie].title %></h1>
-<h1><%= @featuredata[:movie].title %></h1>
-<ul>
-  <% @featuredata[:moviejams].each do |mj| %>
-  <li><%= mj.user.name %></li>
-  <% end %>
-</ul>
+
+<script> $('body').css({"background-image":"url(http://thesmashable.com/wp-content/uploads/2013/07/pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});</script>
+
+<div class="headFix">
+<div class="whiteNoise">
+    <div class="black mypage">
+      <div class="col-md-9">
+          <h2>Movie: <%= @featuredata[:movie].title %></h2>
+        
+        
+        
+        
+      </div>
+
+      <div class="col-md-3 twitter" style="float:right; height:90% width:90%; padding:5px"><a class="twitter-timeline" href="https://twitter.com/SandraM_Muller/lists/movie-jam" data-widget-id="585287226373771264">Tweets from https://twitter.com/SandraM_Muller/lists/movie-jam</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
+    </div>
+  </div>
+</div>
+
+ create_table "movies", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "poster"
+    t.integer  "rating"
+    t.integer  "trailer_id"
+    t.integer  "imdb"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    
+
+      <ul>
+          <% @featuredata[:moviejams].each do |mj| %>
+          <li><%= mj.user.name %></li>
+          <% end %>
+      </ul>
