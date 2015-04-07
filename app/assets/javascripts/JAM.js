@@ -23,7 +23,7 @@ var found;
     
     function LoadTrailer(data) {
       $('.viewTrailer').children().remove();
-      $('.viewTrailer').append('<h3><strong>'+data.title+'</strong></h3>');
+      $('.viewTrailer').append('<h2><strong>'+data.title+'</strong></h2>');
       $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
       '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
     }
@@ -160,18 +160,18 @@ var found;
       alert("This movie has already been added to your list.")}
       else{
     $('.myList').children().remove();
-    $('.myList').append('<input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     movieList.push(currentMovie);
-    $('#addList').remove();
+    $('.viewTrailer input').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your list, please click "update" to save them.</p>');
       for(var i=0;i<movieList.length;i++){
-        $('.myList').append('<li id="'+movieList[i].id+'">'+movieList[i].title+'  <input type="button"  class="remove" value="X"/></li>');
+        $('.myList').append('<p id="'+movieList[i].id+'">'+movieList[i].title+'</p><div class="remove">remove<div>');
           $('.remove').off('click');
           $('.remove').on("click",function(e){
             e.preventDefault;
             Remove($(this).parent().attr("id"));
           })
       }}
+   $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
   }
 
   function shuffle(array) {
