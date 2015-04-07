@@ -52,12 +52,20 @@ var found;
     
   function AppendInfo(){
     $('.viewTrailer').children().remove();
-    console.log(currentMovie)
-    console.log("failure")
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
     $('.viewTrailer').append('<h1><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
-    $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>');
-    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+    CurrentMoviePlot(currentMovie);
+  }
+
+  function CurrentMoviePlot(movie){
+    $.getJSON("/find/" + movie.title)
+      .done(function (data) {
+        $('.viewTrailer').append('<p style="text-align:justify">'+data.description+'</p>');
+        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+      })
+      .fail(function(data) {
+        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+      })
   }
 
   function IMDBtrailer(imdb) {
@@ -65,11 +73,7 @@ var found;
     $.getJSON("/mytrailer/" + imdb)
     .done(function (data) {
       LoadTrailer(data);
-      if(currentMovie.synopsis){
-        console.log(currentMovie)
-        console.log("success")
-        $('.viewTrailer').append('<p style="text-align:justify">'+currentMovie.synopsis+'</p>'); }
-        $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
+      CurrentMoviePlot(currentMovie);
     })
     .fail(function(data) {
       AppendInfo();
