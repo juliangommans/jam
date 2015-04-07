@@ -1,5 +1,7 @@
-
-<script> $('body').css({"background-image":"url(http://thesmashable.com/wp-content/uploads/2013/07/pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});</script>
+<script> 
+$('body').css({"background-image":"url(http://thesmashable.com/wp-content/uploads/2013/07/pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});
+    IMDBFeaturePage(<%= @featuredata[:movie].imdb %>);
+</script>
 
 <div class="headFix">
 <div class="whiteNoise">
@@ -11,18 +13,19 @@
           <h3>Movie Talk</h3>
         
           <div class="rate-movie">
-            <h2><strong><%= @featuredata[:movie].title %></strong>   -    <div class="fb-like" data-href="http://jam-sandramuller.c9.io/feature/<%= @featuredata[:movie].id %>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></h2>
-            <p><iframe width="640" height="390" src="http://v.traileraddict.com/<%= @featuredata[:movie].trailer_id %>?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>
+            <h2><strong><%= @featuredata[:movie].title %></strong></h2>
+             
+             <div class="viewTrailer"></div>
             <p style="text-align:justify">Description: <%= @featuredata[:movie].description %></p>
             <p>Rating:<%= @featuredata[:movie].rating %></p>
           </div>
       </div>
   
-      <div class="col-md-3 twitter" style="float:right; height:90% width:90%; padding:5px"><a class="twitter-timeline" href="https://twitter.com/SandraM_Muller/lists/movie-jam" data-widget-id="585287226373771264">Tweets from https://twitter.com/SandraM_Muller/lists/movie-jam</a>
+      <div class="col-md-3 twitter" style="float:right; padding:5px"><a class="twitter-timeline" href="https://twitter.com/SandraM_Muller/lists/movie-jam" data-widget-id="585287226373771264">Tweets from https://twitter.com/SandraM_Muller/lists/movie-jam</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
 
-      <div class="fb-comments" data-href="http://jam-sandramuller.c9.io/feature/<%= @featuredata[:movie].id %>" data-width="1050" data-numposts="2" data-colorscheme="dark"></div>
+      <div class="fb-comments" data-href="http://moviejam.herokuapp.com/feature/<%= @featuredata[:movie].id %>" data-width="1050" data-numposts="2" data-colorscheme="dark"></div>
     </div>
   </div>
 </div>

@@ -15,21 +15,6 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-
-//     var obj = {method: 'feed', 
-//     link: 'http://www.myusic.com/DailyPosts/Tina_Munim.html', 
-//     picture: 'http://www.myusic.com/DailyPosts/Tina_Munim.jpg', 
-//     name: 'Tina Munim', 
-//     caption: 'Explore, Discover, Share...', 
-//     description: 'Some description', 
-//     actions: action_links, 
-//     from: '196053677086787' 
-//     }; 
-    
-//   $('.userActions').click(function(){
-//     FB.ui(obj, callback);
-//   }) ;
-    
 function postToFeed() { //Facebook Share Function
   // calling the API ...
   var obj = {

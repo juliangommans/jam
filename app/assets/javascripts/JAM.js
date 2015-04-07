@@ -1,10 +1,3 @@
-$(document).ready(function(){
-
-    Upcoming();
-    FeatureTrailer();
-
- });
- 
 var upcomingMovie = [];
 var currentMovie = "";
 var imdb = "";
@@ -22,6 +15,7 @@ var found;
     }
     
     function LoadTrailer(data) {
+      debugger
       $('.viewTrailer').children().remove();
       $('.viewTrailer').append('<h2><strong>'+data.title+'</strong></h2>');
       $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
@@ -66,6 +60,17 @@ var found;
       .fail(function(data) {
         $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="CheckDB();" /><br><br>');
       })
+  }
+  
+  function IMDBFeaturePage(imdb) {
+    $('.viewTrailer').children().remove();
+    $.getJSON("/mytrailer/" + imdb)
+    .done(function (data) {
+       $('.viewTrailer').append('<p>'+data.embed+'</p>')
+    })
+    .fail(function(data) {
+      $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
+    })
   }
 
   function IMDBtrailer(imdb) {
