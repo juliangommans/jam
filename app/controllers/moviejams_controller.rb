@@ -56,6 +56,13 @@ class MoviejamsController < ApplicationController
     @admindata = Moviejam.sort_admindata(users, moviejams)
   end
 
+  def feature
+    redirect_to new_user_session_path unless user_signed_in? and current_user.admin?
+    movie = Movie.find(params[:id])
+    moviejams = Moviejam.all
+    @featuredata = {movie: movie, moviejams: Moviejam.filter_featuredata(movie, moviejams)}
+  end
+
   def check_db(movie)
     Moviejam.find_by(user_id: current_user, movie_id: movie)
   end
