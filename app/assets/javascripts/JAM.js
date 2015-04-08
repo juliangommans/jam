@@ -66,12 +66,13 @@ var movie;
     $.getJSON("/find/" + movie.title)
       .done(function (data) {
         if (data.description == null){
-          $('.viewTrailer').append('<p> Unfortunately we could not find a description for this movie</p>');
+          $('.viewTrailer').append('<p> Unfortunately we could not find a description for this movie</p><br>');
         } else {
           $('#movieDescription').remove();
-          $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p>');
+          $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p><br>');
         }
         $('#movieScore').remove();
+        $('.viewTrailer').append('<p>Please rate how excited you are to see this movie before adding it to your list</p>')
         $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Select a pre-watch rating</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select>');
       })
   }
