@@ -73,7 +73,7 @@ var movie;
           $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p>');
         }
         $('#movieScore').remove();
-        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select a Rating</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select>');
+        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Select a pre-watch rating</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select>');
       })
   }
 
@@ -199,7 +199,6 @@ var movie;
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your (temporary) list, please click "update" to permanently save them.</p>');
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
           $('.remove').off('click');
@@ -208,6 +207,7 @@ var movie;
             Remove($(this).parent().attr("id"));
           })
       }}
+    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
   }
 
   function watched(score, id){
