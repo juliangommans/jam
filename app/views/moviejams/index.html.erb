@@ -17,7 +17,9 @@
                       <p><%= moviejam.movie.title %></p>
                        - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>)
                       <div class="removebtn"><%= button_to "Remove", {:controller => "moviejams", :action => 'remove', :id => moviejam.id }, :method => :post %></div>
-                      <div class="watchbtn"><%= button_to "Watch", {:controller => "moviejams", :action => 'watched', :id => moviejam.id }, :method => :post %></div>
+                      <div class="watchbtn">
+                        <%= button_to "Watch", {:controller => "moviejams", :action => 'watched', :id => moviejam.id }, :method => :post %>
+                      </div>
                       <br>
                   <% end %>
                 <% end %>
