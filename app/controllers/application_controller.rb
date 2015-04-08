@@ -9,11 +9,15 @@ class ApplicationController < ActionController::Base
     matching_movies = []
     all_movies = Movie.all
     all_movies.each do |movie|
-      if movie.title.downcase.include? 'ultron'
+      if movie.title.downcase.include? 'avengers: age'
         matching_movies << movie
       end
     end
-    @movie = matching_movies.sample
+    if matching_movies.count > 0
+      @movie = matching_movies.sample
+    else
+      @movie = all_movies.sample
+    end
   end
 
 end
