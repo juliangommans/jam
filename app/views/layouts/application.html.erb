@@ -35,12 +35,12 @@
               <ul class="nav navbar-nav">
                   <li><%= link_to "Home", movies_path %></li>
                 <% if !current_user.nil? %>
-                  <li><%= link_to "MovieTalk", feature_path(feature_movie) %></li>
-                <% end %>
-                <% if !current_user.nil? %>
                   <li><%= link_to "MyAccount", moviejams_path %></li>
                 <% end %>
                 <% if current_user.try(:admin?) %>
+                  <li><%= link_to "MovieTalk", feature_path(feature_movie) %></li>
+                <% end %>
+                <% if !current_user.nil? %>
                   <li><%= link_to "Admin", admin_path %></li>
                 <% end %>
               </ul>
