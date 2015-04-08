@@ -9,7 +9,7 @@
 </head>
 <body>
      <div id="fb-root"></div>
-  
+
      <div id="blanket" style="display:none;"></div>
                     <div id="popUpDiv" style="display:none;">
                       <table>
@@ -55,7 +55,8 @@
   <div class="container body-content">
          <%= yield %>
       <footer class="footer">
-        <p><strong>Team JAM-mer's Jullian Gommans, Sandra Muller, Steven Brown. </strong></p>
+        <% time = Time.now %>
+        <p><strong>Team JAM-mer's Jullian Gommans, Sandra Muller, Steven Brown. </strong><%= time.strftime("%B #{time.day.ordinalize}") %></p>
       </footer>
   </div>
 </body>
