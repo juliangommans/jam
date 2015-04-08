@@ -35,7 +35,7 @@
               <ul class="nav navbar-nav">
                   <li><%= link_to "Home", movies_path %></li>
                 <% if !current_user.nil? %>
-                  <li><%= link_to "MovieTalk", feature_path(feature_movie) %></li>
+                  <li><%= link_to "MovieTalk", feature_path+"?id=#{feature_movie.id}" %></li>
                 <% end %>
                 <% if !current_user.nil? %>
                   <li><%= link_to "MyAccount", moviejams_path %></li>

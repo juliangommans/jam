@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get '/movie_list/:id' => 'moviejams#movie_list', as: 'movie_list'
   get '/admin' => 'moviejams#admin', as: 'admin'
-  get '/feature/:id' => 'moviejams#feature', as: 'feature'
+  get '/feature' => 'moviejams#feature', as: 'feature'
   get '/add/:id/:title' => 'moviejams#add', as: 'add_movie'
   post '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
   post '/watched/:id' => 'moviejams#watched', as: 'watch_movie'
