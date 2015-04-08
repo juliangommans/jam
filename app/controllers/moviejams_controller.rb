@@ -57,7 +57,7 @@ class MoviejamsController < ApplicationController
   end
 
   def feature
-    redirect_to new_user_session_path unless user_signed_in? and current_user.admin?
+    redirect_to new_user_session_path unless user_signed_in?
     movie = Movie.find(params[:id])
     moviejams = Moviejam.all
     @featuredata = {movie: movie, moviejams: Moviejam.filter_featuredata(movie, moviejams)}
