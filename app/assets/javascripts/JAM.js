@@ -199,9 +199,8 @@ var movie;
             e.preventDefault;
             Remove($(this).parent().attr("id"));
           })
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
       }}
-
+      $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
   }
 
   function shuffle(array) {
