@@ -16,7 +16,6 @@ var movie;
     }
 
     function LoadTrailer(data) {
-      debugger
       $('.viewTrailer').children().remove();
       $('.viewTrailer').append('<h2><strong>'+data.title+'</strong></h2>');
       $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
