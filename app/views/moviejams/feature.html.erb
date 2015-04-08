@@ -1,4 +1,4 @@
-<script> 
+<script>
 $('body').css({"background-image":"url(http://thesmashable.com/wp-content/uploads/2013/07/pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});
     IMDBFeaturePage(<%= @featuredata[:movie].imdb %>);
 </script>
@@ -6,18 +6,16 @@ $('body').css({"background-image":"url(http://thesmashable.com/wp-content/upload
 <div class="headFix">
 <div class="whiteNoise">
     <div class="black mypage">
-     
+
       <div class="col-md-9">
-        
+
           <h3>Movie Talk</h3>
             <p>Movie
-              <select id="movie" onchange="Movie(this.value);" >
-                  <% @featuredata[:movies].each do |movie| %>
-                      <option value="<%= movie.id %>"><%= movie.title %></option>
-                  <% end %>
-             </select>
-          </p>          
-        
+              <%= form_tag('/feature?id='+params[:id], method: "get") do %>
+                <%= select_tag "id", options_from_collection_for_select(@featuredata[:movies], "id", "title"), prompt: "Select one of your movies", :onchange => "this.form.submit();" %>
+              <% end %>
+          </p>
+
           <div class="rate-movie">
             <h2><strong><%= @featuredata[:movie].title %></strong></h2>
              <div class="viewTrailer"></div>
@@ -28,7 +26,7 @@ $('body').css({"background-image":"url(http://thesmashable.com/wp-content/upload
                 <div class="fb-comments" style="overflow: scroll; opacity:0.9; border-radius:5px" data-href="http://moviejam.herokuapp.com/feature/<%= @featuredata[:movie].id %>" data-width="750" data-numposts="2" data-colorscheme="dark" data-order-by="reverse_time"></div>
           
       </div>
-  
+
       <div class="col-md-3 twitter" style="float:right; padding:5px; margin-top:2%">
         <p>MovieJam</p><div class="fb-like" data-href="http://moviejam.herokuapp.com/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div><br><br>
         
