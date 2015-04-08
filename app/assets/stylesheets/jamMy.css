@@ -253,3 +253,7 @@ td, th {
 #missing {
     color:white;
 }
+
+.row fixed-size{
+    height: 100px;
+}
