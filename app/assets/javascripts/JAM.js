@@ -196,6 +196,7 @@ var movie;
       alert("This movie has already been added to your list.")}
       else{
     $('.myList').children().remove();
+    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your (temporary) list, please click "update" to permanently save them.</p>');
@@ -207,7 +208,6 @@ var movie;
             Remove($(this).parent().attr("id"));
           })
       }}
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
   }
 
   function watched(score, id){
