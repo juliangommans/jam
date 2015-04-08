@@ -19,7 +19,6 @@ var movie;
     function AddFeatureToDB(title){
       $.getJSON("/feature/add/"+title)
         .done(function (data) {
-          console.log(data)
           var title = {
             "title": data.Title
           }
@@ -210,9 +209,19 @@ var movie;
       }}
   }
 
-  function postRating(id){
-    $('.pud2').children().remove();
+  function postRating(id, title){
+    $('.pud').children().remove();
     popup('popUpDiv2');
+    $('.postScore').remove();
+    $.getJSON("/find/" + title)
+      .done(function (data) {
+        $('#pud').append('<p class="postScore"><strong>'+data.title+'</strong><p>');
+        $('#pud').append('<img src="'+data.poster+'" class="postScore"><br>');
+        $('#pud').append('<p class="postScore"> Please select a rating on how you found this movie.</p>')
+        $('#pud').append('<select class="postScore" onchange="watched(this.value, '+id+');" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
+        $('#pud').append('<p>'+data.description+'<p>');
+
+      })
   }
 
   function watched(score, id){

@@ -256,7 +256,14 @@ td, th {
 .missing {
     color:white;
 }
-.movie{
+.movie {
     color: black;
+}
+
+.postScore {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
