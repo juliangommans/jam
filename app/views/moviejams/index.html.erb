@@ -41,7 +41,7 @@
                   <% @moviejams[1].each do |moviejam| %>
                    <p style="padding-top: 5px"><%= moviejam.movie.title %></p>
                        - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>) - your after rating: (<%= moviejam.postrating < 0 || moviejam.postrating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.postrating %>)
-                  <br>
+                  <br><hr>
                   <% end %>
                 <% end %>
         </div>

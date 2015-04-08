@@ -199,6 +199,7 @@ var movie;
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
     $('.viewTrailer').append('<p>You have successfully added this movie to your (temporary) list, please click "update" to permanently save them.</p>');
+    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
           $('.remove').off('click');
@@ -206,7 +207,6 @@ var movie;
             e.preventDefault;
             Remove($(this).parent().attr("id"));
           })
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
       }}
   }
 

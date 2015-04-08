@@ -184,12 +184,9 @@ div.jumbotron h4 {
 }
 td {
    text-align: left;
-   padding-left: 10px;
-   padding-right:5px;
 }
 button, input {
     color: black;
-    border-radius: 10px;
 }
 
 #userList {
@@ -224,9 +221,11 @@ button, input {
 #popUpDiv a {position:relative; top:20px; left:20px}
 
 
-td {
-    width: 200px;
+td, th {
+    width: auto;
+    padding: 5px;
     margin: auto;
+    font-size: 14px;
 }
 
 .poster-search {
@@ -255,3 +254,4 @@ td {
 .missing {
     color:white;
 }
+
