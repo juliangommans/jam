@@ -210,6 +210,11 @@ var movie;
       }}
   }
 
+  function postRating(id){
+    $('.pud2').children().remove();
+    popup('popUpDiv2');
+  }
+
   function watched(score, id){
     if (score === ""){
       alert("Please select a score before we can set your movie to 'watched'")

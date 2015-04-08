@@ -18,15 +18,7 @@
                        - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>)
                       <div class="removebtn"><%= button_to "Remove", {:controller => "moviejams", :action => 'remove', :id => moviejam.id }, :method => :post %></div>
                       <div class="watchbtn">
-                        <select onchange="watched(this.value, '<%= moviejam.id %>');" >
-                          <option value="">Please Select a Rating</option>
-                          <option value="0">0 Stars</option>
-                          <option value="1">1 Star</option>
-                          <option value="2">2 Stars</option>
-                          <option value="3">3 Stars</option>
-                          <option value="4">4 Stars</option>
-                          <option value="5">5 Stars</option>
-                        </select>
+                        <button id="watched" type="button" onclick="postRating('<%=moviejam.id%>');">Watched</button>
                       </div>
                       <br>
                   <% end %>
@@ -35,7 +27,7 @@
 
         <div class="col-md-5 rightbox"><br>
            <h4>Watched Movies</h4>
-                          <% if @moviejams[1].empty? %>
+              <% if @moviejams[1].empty? %>
                   <p>You have no watched movies in your list.</p>
                 <% else %>
                   <% @moviejams[1].each do |moviejam| %>
