@@ -207,7 +207,7 @@ button, input {
    width:100%;
 }
 
-#popUpDiv {
+.popUpDiv {
     position:absolute;
     background-color: white;
     color: black;
@@ -219,7 +219,8 @@ button, input {
     border-radius: 10px;
 }
 
-#popUpDiv a {top:20px; left:20px}
+
+.popUpDiv a {top:20px; left:20px}
 
 
 td, th {
@@ -255,7 +256,14 @@ td, th {
 .missing {
     color:white;
 }
-.movie{
+.movie {
     color: black;
+}
+
+.postScore {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
