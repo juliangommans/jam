@@ -1,4 +1,4 @@
-<script> $('body').css({"background-image":"url(http://hdnextyear.com/wp-content/uploads/2015/02/hd-despicable-me-wallpapers-amp-desktop-backgrounds-movie-wallpapers-desktop-images-desktop-wallpapers.jpg)"});</script>
+<script> $('body').css({"background-image":"url(hd-despicable-me-wallpapers-amp-desktop-backgrounds-movie-wallpapers-desktop-images-desktop-wallpapers.jpg)"});</script>
 
 <div class="headFix">
 
@@ -15,13 +15,12 @@
                 <% else %>
                   <% @moviejams[0].each do |moviejam| %>
                       <p style="padding-top: 5px"><%= moviejam.movie.title %></p>
-                       - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>)
+                       pre-rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>)
                       <div class="removebtn"><%= button_to "Remove", {:controller => "moviejams", :action => 'remove', :id => moviejam.id }, :method => :post %></div>
                       <div class="watchbtn">
                         <button id="watched" type="button" onclick="postRating('<%=moviejam.id%>', '<%=moviejam.movie.title%>');">Watched</button>
                       </div>
-                      <br>
-                      <hr>
+                      <br><hr>
                   <% end %>
                 <% end %>
         </div>
@@ -33,7 +32,7 @@
                 <% else %>
                   <% @moviejams[1].each do |moviejam| %>
                    <p style="padding-top: 5px"><%= moviejam.movie.title %></p>
-                       - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>) - your after rating: (<%= moviejam.postrating < 0 || moviejam.postrating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.postrating %>)
+                      pre-rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>) post-rating: (<%= moviejam.postrating < 0 || moviejam.postrating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.postrating %>)
                   <br><hr>
                   <% end %>
                 <% end %>

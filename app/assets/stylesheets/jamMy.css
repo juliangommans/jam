@@ -1,5 +1,4 @@
 html, body {
-    height: 100%;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -256,7 +255,7 @@ td, th {
 .missing {
     color:white;
 }
-.movie {
+.movie, #id {
     color: black;
+    font-weight:normal;
 }
-
