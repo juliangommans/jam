@@ -18,12 +18,14 @@ var movie;
 
     function AddFeatureToDB(title){
       $.getJSON("/feature/add/"+title)
+      .done(function (data) {
+        $.getJSON("/find/"+data.Title)
         .done(function (data) {
-          var title = {
-            "title": data.Title
-          }
-          CurrentMoviePlot(title)
-          });
+          currentMovie = data
+          CurrentMoviePlot(currentMovie)
+          console.log(currentMovie)
+        });
+      });
     }
 
     function LoadTrailer(data) {
@@ -84,7 +86,7 @@ var movie;
        $('.viewTrailer').append('<p>'+data.embed+'</p>')
     })
     .fail(function(data) {
-      $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
+      $('.viewTrailer').append('<h1 class="missing"><strong>"We could not find the trailer for this movie."</strong></h1>');
     })
   }
 
