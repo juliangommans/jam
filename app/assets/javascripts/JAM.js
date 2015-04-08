@@ -68,13 +68,15 @@ var movie;
     $.getJSON("/find/" + movie.title)
       .done(function (data) {
         if (data.description == null){
+
           $('.viewTrailer').append('<p> Unfortunately we could not find a description for this movie</p><br>');
         } else {
           $('#movieDescription').remove();
           $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p><br>');
         }
         $('#movieScore').remove();
-        $('.viewTrailer').append('<p>Please rate how excited you are to see this movie before adding it to your list</p>')
+         $('.pleaseSelect').remove();
+        $('.viewTrailer').append('<p class="pleaseSelect">Please rate how excited you are to see this movie before adding it to your list</p>')
         $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Select a pre-watch rating</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select>');
       })
   }
@@ -189,7 +191,7 @@ var movie;
     setTimeout(function() {
     $('.myList').children().remove();
     $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
-  }, 1000);
+  }, 1500);
   }
 
   function AddList() {
@@ -200,6 +202,7 @@ var movie;
     $('.myList').children().remove();
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
+    $('.pleaseSelect').remove();
     $('.viewTrailer').append('<p>Successfully added to "My Movie JAM", please click "update" to save.</p>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
@@ -208,8 +211,9 @@ var movie;
             e.preventDefault;
             Remove($(this).parent().attr("id"));
           })
-      }}
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
+      }
+       $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
+    }
   }
 
   function postRating(id, title){
