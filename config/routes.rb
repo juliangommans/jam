@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/trailer' => 'movies#trailer', as: 'movie_trailer'
   get '/mytrailer/:imdb' => 'movies#mytrailer', as: 'movie_mytrailer'
   get '/find/:title' => 'movies#find', as: 'movie_find'
+  get '/feature/add/:title' => 'movies#add_feature', as: 'add_feature_to_movies'
 
   get '/index/upcoming' => 'upcomingmovies#index', as: 'upcoming_movies'
 
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   get '/feature/:id' => 'moviejams#feature', as: 'feature'
   get '/add/:id/:title' => 'moviejams#add', as: 'add_movie'
   post '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
-  post '/watched/:id' => 'moviejams#watched', as: 'watch_movie'
+  get '/watched/:id/:score' => 'moviejams#watched', as: 'watch_movie'
 
   root 'movies#index'
 
