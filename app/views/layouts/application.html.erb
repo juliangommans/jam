@@ -13,7 +13,7 @@
      <div id="blanket" style="display:none;"></div>
                     <div id="popUpDiv" style="display:none;">
                       <table>
-                      <a href="#" onclick="popup('popUpDiv')" >- Click to close -</a><br>
+                      <a href="#" class="p-title" id="ccc" onclick="popup('popUpDiv')" >- Click to close -</a><br>
                         <tr><td><a href="#" class="movie-link" id='a0' onclick="popup('popUpDiv')" ></a><br></td>
                         <td><a href="#" class="movie-link" id='a1' onclick="popup('popUpDiv')" ></a><br></td></tr>
                         <tr><td><a href="#" class="movie-link" id='a2' onclick="popup('popUpDiv')" ></a><br></td>
@@ -35,12 +35,12 @@
               <ul class="nav navbar-nav">
                   <li><%= link_to "Home", movies_path %></li>
                 <% if !current_user.nil? %>
-                  <li><%= link_to "MovieTalk", feature_path+"?id=#{feature_movie.id}" %></li>
-                <% end %>
-                <% if !current_user.nil? %>
                   <li><%= link_to "MyAccount", moviejams_path %></li>
                 <% end %>
                 <% if current_user.try(:admin?) %>
+                  <li><%= link_to "MovieTalk", feature_path+"?id=#{feature_movie.id}" %></li>
+                <% end %>
+                <% if !current_user.nil? %>
                   <li><%= link_to "Admin", admin_path %></li>
                 <% end %>
               </ul>

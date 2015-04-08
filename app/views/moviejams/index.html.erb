@@ -17,7 +17,17 @@
                       <p><%= moviejam.movie.title %></p>
                        - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>)
                       <div class="removebtn"><%= button_to "Remove", {:controller => "moviejams", :action => 'remove', :id => moviejam.id }, :method => :post %></div>
-                      <div class="watchbtn"><%= button_to "Watch", {:controller => "moviejams", :action => 'watched', :id => moviejam.id }, :method => :post %></div>
+                      <div class="watchbtn">
+                        <select onchange="watched(this.value, '<%= moviejam.id %>');" >
+                          <option value="">Please Select a Rating</option>
+                          <option value="0">0 Stars</option>
+                          <option value="1">1 Star</option>
+                          <option value="2">2 Stars</option>
+                          <option value="3">3 Stars</option>
+                          <option value="4">4 Stars</option>
+                          <option value="5">5 Stars</option>
+                        </select>
+                      </div>
                       <br>
                   <% end %>
                 <% end %>
@@ -31,7 +41,7 @@
                   <% @moviejams[1].each do |moviejam| %>
                    <p style="padding-top: 5px"><%= moviejam.movie.title %></p>
                        - your before rating: (<%= moviejam.prerating < 0 || moviejam.prerating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.prerating %>) - your after rating: (<%= moviejam.postrating < 0 || moviejam.postrating > 5 ? 'unrated' : 9733.chr(Encoding::UTF_8) * moviejam.postrating %>)
-                  <br>
+                  <br><hr>
                   <% end %>
                 <% end %>
         </div>

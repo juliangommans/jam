@@ -72,5 +72,15 @@ module MoviesHelper
       check_description(movies)
     end
 
+    def self.new_feature(terms)
+      data = HTTParty.get('http://www.omdbapi.com/?t='+terms+'&y=&plot=full&r=json')
+      unless check_db(data["Title"])
+        Movie.create(title: data["Title"], description: data["Plot"], poster: data["Poster"])
+      end
+      return data
+    end
+
   end
+
+
 end
