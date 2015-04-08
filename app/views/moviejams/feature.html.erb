@@ -21,7 +21,7 @@ $('body').css({"background-image":"url(pacific-rim-characters-wallpapers-pacific
             <p>IMDb Rating: <strong><% dis_rat = @featuredata[:movie].rating/10 %>(<%= dis_rat < 0 || dis_rat > 10 ? 'unrated' : 9733.chr(Encoding::UTF_8) * dis_rat + 9734.chr(Encoding::UTF_8) * (10-dis_rat) %>)</strong></p>
           </div><br>
 
-                <div class="fb-comments" style="overflow: scroll; opacity:0.9; border-radius:5px" data-href="http://moviejam.herokuapp.com/feature/<%= @featuredata[:movie].id %>" data-width="750" data-numposts="2" data-colorscheme="dark" data-order-by="reverse_time"></div>
+                <div class="fb-comments" style="overflow: scroll; opacity:0.9; border-radius:5px" data-href="http://moviejam.herokuapp.com/feature?id=<%= @featuredata[:movie].id %>" data-width="750" data-numposts="2" data-colorscheme="dark" data-order-by="reverse_time"></div>
 
       </div>
 
