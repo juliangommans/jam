@@ -168,7 +168,7 @@ var movie;
   function UserPreRating(score) {
     currentMovie["pre_rating"] = score
     $('#movieScore').remove();
-    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br>');
+    AddList();
   }
 
   function UpdateList(){
