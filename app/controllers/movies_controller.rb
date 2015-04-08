@@ -19,11 +19,6 @@ class MoviesController < ApplicationController
     render json: @result
   end
 
-  # def upcoming
-  #   @data = MoviesHelper::RottenTomatoesAPI.upcoming
-  #   render json: @data
-  # end
-
   def search
     @search = MoviesHelper::RottenTomatoesAPI.search(params[:terms])
     render json: @search
