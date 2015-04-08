@@ -196,10 +196,9 @@ var movie;
       alert("This movie has already been added to your list.")}
       else{
     $('.myList').children().remove();
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
-    $('.viewTrailer').append('<p>You have successfully added this movie to your (temporary) list, please click "update" to permanently save them.</p>');
+    $('.viewTrailer').append('<p>Successfully added to "My Movie JAM", please click "update" to save.</p>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
           $('.remove').off('click');
@@ -208,6 +207,7 @@ var movie;
             Remove($(this).parent().attr("id"));
           })
       }}
+    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
   }
 
   function postRating(id, title){
@@ -218,14 +218,15 @@ var movie;
         $('#pud').append('<p class="p-title"><strong>'+data.title+'</strong><p>');
         $('#pud').append('<img src="'+data.poster+'" class="p-title"><br>');
         $('#pud').append('<p class="p-title"> Please select a rating on how you found this movie.</p>')
-        $('#pud').append('<select class="p-title" onchange="watched(this.value, '+id+');" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
+        $('#pud').append('<select class="p-title" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
         $('#pud').append('<p style="padding: 5px">'+data.description+'<p>');
+         $('#pud').append('<br><input type="button" style="text-align:center; padding:10px" class="update" value="Update" onclick="watched(this.value, '+id+');"/>');
       })
   }
 
   function watched(score, id){
     if (score === ""){
-      alert("Please select a score before we can set your movie to 'watched'")
+      alert("Please select a score before the movie can be set to 'watched'")
     } else {
       $.ajax({
         url: '/watched/' + id +'/' + score,

@@ -1,5 +1,5 @@
 <script>
-$('body').css({"background-image":"url(http://thesmashable.com/wp-content/uploads/2013/07/pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});
+$('body').css({"background-image":"url(pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});
     IMDBFeaturePage(<%= @featuredata[:movie].imdb %>);
 </script>
 
@@ -10,11 +10,9 @@ $('body').css({"background-image":"url(http://thesmashable.com/wp-content/upload
       <div class="col-md-9">
 
           <h3>Movie Talk</h3>
-            <p>Movie
               <%= form_tag('/feature?id='+params[:id], method: "get") do %>
                 <%= select_tag "id", options_from_collection_for_select(@featuredata[:movies], "id", "title"), prompt: "Select one of your movies", :onchange => "this.form.submit();" %>
               <% end %>
-          </p>
 
           <div class="rate-movie">
             <h2><strong><%= @featuredata[:movie].title %></strong></h2>
@@ -37,7 +35,6 @@ $('body').css({"background-image":"url(http://thesmashable.com/wp-content/upload
           <% @featuredata[:moviejams].each do |mj| %>
               <li><%= mj.user.name %></li>
           <% end %>
-      
       </div>
       
       </div>

@@ -29,6 +29,7 @@ class MoviejamsController < ApplicationController
     @moviejam.save
     redirect_to moviejams_path
   end
+  
 
   def index
     redirect_to new_user_session_path unless user_signed_in?
@@ -43,6 +44,16 @@ class MoviejamsController < ApplicationController
       movie_exists = true
     end
     render json: movie_exists
+  end
+
+  def watchJS
+    @moviejams = Moviejam.where(user_id: current_user.id)
+      for mj in @moviejams
+        movie = Movie.find_by(movie_id: mj.movie_id)
+        mj.moviename = movie.title  
+        
+      end
+    render json: @moviejams
   end
 
   def find_movie(movie)
