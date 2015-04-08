@@ -18,12 +18,14 @@ var movie;
 
     function AddFeatureToDB(title){
       $.getJSON("/feature/add/"+title)
+      .done(function (data) {
+        $.getJSON("/find/"+data.Title)
         .done(function (data) {
-          var title = {
-            "title": data.Title
-          }
-          CurrentMoviePlot(title)
-          });
+          currentMovie = data
+          CurrentMoviePlot(currentMovie)
+          console.log(currentMovie)
+        });
+      });
     }
 
     function LoadTrailer(data) {
@@ -66,12 +68,13 @@ var movie;
     $.getJSON("/find/" + movie.title)
       .done(function (data) {
         if (data.description == null){
-          $('.viewTrailer').append('<p> Unfortunately we could not find a description for this movie</p>');
+          $('.viewTrailer').append('<p> Unfortunately we could not find a description for this movie</p><br>');
         } else {
           $('#movieDescription').remove();
-          $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p>');
+          $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p><br>');
         }
         $('#movieScore').remove();
+        $('.viewTrailer').append('<p>Please rate how excited you are to see this movie before adding it to your list</p>')
         $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Select a pre-watch rating</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select>');
       })
   }
@@ -83,7 +86,7 @@ var movie;
        $('.viewTrailer').append('<p>'+data.embed+'</p>')
     })
     .fail(function(data) {
-      $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
+      $('.viewTrailer').append('<h1 class="missing"><strong>"We could not find the trailer for this movie."</strong></h1>');
     })
   }
 
@@ -212,15 +215,13 @@ var movie;
   function postRating(id, title){
     $('.pud').children().remove();
     popup('popUpDiv2');
-    $('.postScore').remove();
     $.getJSON("/find/" + title)
       .done(function (data) {
-        $('#pud').append('<p class="postScore"><strong>'+data.title+'</strong><p>');
-        $('#pud').append('<img src="'+data.poster+'" class="postScore"><br>');
-        $('#pud').append('<p class="postScore"> Please select a rating on how you found this movie.</p>')
-        $('#pud').append('<select class="postScore" onchange="watched(this.value, '+id+');" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
-        $('#pud').append('<p>'+data.description+'<p>');
-
+        $('#pud').append('<p class="p-title"><strong>'+data.title+'</strong><p>');
+        $('#pud').append('<img src="'+data.poster+'" class="p-title"><br>');
+        $('#pud').append('<p class="p-title"> Please select a rating on how you found this movie.</p>')
+        $('#pud').append('<select class="p-title" onchange="watched(this.value, '+id+');" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
+        $('#pud').append('<p style="padding: 5px">'+data.description+'<p>');
       })
   }
 
