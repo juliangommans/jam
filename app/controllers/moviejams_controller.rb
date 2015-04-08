@@ -61,7 +61,7 @@ class MoviejamsController < ApplicationController
     movie = Movie.find(params[:id])
     movies = Movie.all
     moviejams = Moviejam.all
-    @featuredata = {movie: movie, movies: Moviejam.filter_feature_movies(movies, moviejams), moviejams: Moviejam.filter_feature_mjs(movie, moviejams)}
+    @featuredata = {movie: movie, movies: Moviejam.filter_feature_movies(movies, moviejams, current_user), moviejams: Moviejam.filter_feature_mjs(movie, moviejams)}
   end
 
   def check_db(movie)

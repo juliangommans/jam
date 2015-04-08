@@ -44,10 +44,10 @@ class Moviejam < ActiveRecord::Base
     return feature_mjs
   end
 
-  def self.filter_feature_movies(movies,mjs)
+  def self.filter_feature_movies(movies,mjs,c_u)
     feature_movies = []
     mjs.each do |mj|
-      if user.id == current_user
+      if mj.user.id == c_u.id
         feature_movies << mj.movie
       end
     end
