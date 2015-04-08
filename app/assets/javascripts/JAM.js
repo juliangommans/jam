@@ -18,12 +18,14 @@ var movie;
 
     function AddFeatureToDB(title){
       $.getJSON("/feature/add/"+title)
+      .done(function (data) {
+        $.getJSON("/find/"+data.Title)
         .done(function (data) {
-          var title = {
-            "title": data.Title
-          }
-          CurrentMoviePlot(title)
-          });
+          currentMovie = data
+          CurrentMoviePlot(currentMovie)
+          console.log(currentMovie)
+        });
+      });
     }
 
     function LoadTrailer(data) {
