@@ -12,9 +12,9 @@ var movie;
       $.getJSON("/trailer")
         .done(function (data) {
           LoadTrailer(data);
-        });  
+        });
     }
-    
+
     function LoadTrailer(data) {
       debugger
       $('.viewTrailer').children().remove();
@@ -22,7 +22,7 @@ var movie;
       $('.viewTrailer').append('<p><iframe width="640" height="390" src="http://v.traileraddict.com/'+data.trailer_id+
       '?autoplay=1" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" frameborder="1"></iframe></p>');
     }
-    
+
     function Upcoming() {
       $('.upcoming').children().remove();
       $.getJSON("/index/upcoming")
@@ -44,15 +44,11 @@ var movie;
         });
       });
     }
-    
+
   function AppendInfo(){
     $('.viewTrailer').children().remove();
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
-<<<<<<< HEAD
     $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
-=======
-    $('.viewTrailer').append('<h1 id="missing"><strong>"Sorry (wo)man, we could not find the trailer for this movie."</strong></h1>');
->>>>>>> a62175c3b84a8c159fd7ee22464a7e83f0f7e6b9
     CurrentMoviePlot(currentMovie);
   }
 
@@ -71,7 +67,7 @@ var movie;
       //   $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
       // })
   }
-  
+
   function IMDBFeaturePage(imdb) {
     $('.viewTrailer').children().remove();
     $.getJSON("/mytrailer/" + imdb)
@@ -94,8 +90,8 @@ var movie;
       AppendInfo();
     })
   }
-    
-    
+
+
   function PostSearch(){
     $('.movie-link').children().remove();
     var terms = document.getElementById("query").value;
@@ -108,8 +104,8 @@ var movie;
         searchedMovies = [];
         var movies = data.movies
         for(var i=0;i<movies.length;i++){
-          searchedMovies[i] = movies[i] 
-          $('#a'+i+'').append('<img class="poster-search" src="'+movies[i].posters.profile+'"><p class="p-title">'+movies[i].title+'</p>')   
+          searchedMovies[i] = movies[i]
+          $('#a'+i+'').append('<img class="poster-search" src="'+movies[i].posters.profile+'"><p class="p-title">'+movies[i].title+'</p>')
         }
           $('.movie-link').on('click', function(e) {
             e.preventDefault();
@@ -127,7 +123,7 @@ var movie;
     };
 
   function Remove(id) {
-    
+
     if (id.alternate_ids.imdb === undefined){
       $('#'+id.imdb+'').remove();
       movie = $.grep(movieList, function(e){ return e.id == id; });
@@ -160,7 +156,7 @@ var movie;
           UserPreRating(score);
       });
     }
-  } 
+  }
 
   function UserPreRating(score) {
     currentMovie["pre_rating"] = score
@@ -180,7 +176,7 @@ var movie;
             }
           })
         }
-    
+
     setTimeout(function() {
     $('.myList').children().remove();
     $('.myList').append("<p>You've successfully added these movies to your Movie Jam list to view later.</p><a href='/moviejams'><p>Click here to go to your Movie Jam page.</p></a>");
@@ -205,7 +201,7 @@ var movie;
             Remove($(this).parent().attr("id"));
           })
       }}
-   
+
   }
 
   function shuffle(array) {
