@@ -1,21 +1,26 @@
 <script> 
 $('body').css({"background-image":"url(http://thesmashable.com/wp-content/uploads/2013/07/pacific-rim-characters-wallpapers-pacific-rim-movie-wallpapers-hd-backgrounds-pacific-rim-wallpapers.jpg)"});
     IMDBFeaturePage(<%= @featuredata[:movie].imdb %>);
+    Movie(   );
 </script>
 
 <div class="headFix">
 <div class="whiteNoise">
     <div class="black mypage">
-      
-      
-      
+     
       <div class="col-md-9">
         
           <h3>Movie Talk</h3>
+            <p>Movie
+              <select id="movie" onchange="Movie(this.value);" >
+                  <% @featuredata[:moviejams].each do |mj| %>
+                      <option value="<%= mj.movies.movie_id %>"><%= mj.movies.title %></option>
+                  <% end %>
+             </select>
+          </p>          
         
           <div class="rate-movie">
             <h2><strong><%= @featuredata[:movie].title %></strong></h2>
-             
              <div class="viewTrailer"></div>
             <p style="text-align:justify">Description: <%= @featuredata[:movie].description %></p>
             <p>Rating:<%= @featuredata[:movie].rating %></p>
@@ -28,13 +33,7 @@ $('body').css({"background-image":"url(http://thesmashable.com/wp-content/upload
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>
 
-      <div class="fb-comments" style="overflow: scroll" data-href="http://moviejam.herokuapp.com/feature/<%= @featuredata[:movie].id %>" data-width="1050" data-numposts="2" data-colorscheme="dark"></div>
+      <div class="fb-comments" style="overflow: scroll; opacity:0.9" data-href="http://moviejam.herokuapp.com/feature/<%= @featuredata[:movie].id %>" data-width="1057" data-numposts="2" data-colorscheme="dark" data-order-by="time"></div>
     </div>
   </div>
 </div>
-
-      <ul>
-          <% @featuredata[:moviejams].each do |mj| %>
-          <li><%= mj.user.name %></li>
-          <% end %>
-      </ul>
