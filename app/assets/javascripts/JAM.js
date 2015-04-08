@@ -161,7 +161,7 @@ var movie;
   function UserPreRating(score) {
     currentMovie["pre_rating"] = score
     $('#movieScore').remove();
-    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br><br>');
+    $('.viewTrailer').append('<input type="button"  id="addList" value="Add" onclick="AddList();" /><br>');
   }
 
   function UpdateList(){
@@ -191,7 +191,6 @@ var movie;
     $('.myList').children().remove();
     movieList.push(currentMovie);
     $('.viewTrailer input').remove();
-    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
     $('.viewTrailer').append('<p>You have successfully added this movie to your (temporary) list, please click "update" to permanently save them.</p>');
       for(var i=0;i<movieList.length;i++){
         $('.myList').append('<li style="align:left" id="'+movieList[i].id+'">'+movieList[i].title+'<div class="remove">remove<div></li>');
@@ -200,6 +199,7 @@ var movie;
             e.preventDefault;
             Remove($(this).parent().attr("id"));
           })
+    $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
       }}
 
   }
