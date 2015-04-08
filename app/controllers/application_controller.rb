@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
         matching_movies << movie
       end
     end
-    @movie = matching_movies.sample
+    if matching_movies.count > 0
+      @movie = matching_movies.sample
+    else
+      @movie = all_movies.sample
+    end
   end
 
 end
