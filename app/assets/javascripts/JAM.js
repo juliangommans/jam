@@ -212,15 +212,13 @@ var movie;
   function postRating(id, title){
     $('.pud').children().remove();
     popup('popUpDiv2');
-    $('.postScore').remove();
     $.getJSON("/find/" + title)
       .done(function (data) {
-        $('#pud').append('<p class="postScore"><strong>'+data.title+'</strong><p>');
-        $('#pud').append('<img src="'+data.poster+'" class="postScore"><br>');
-        $('#pud').append('<p class="postScore"> Please select a rating on how you found this movie.</p>')
-        $('#pud').append('<select class="postScore" onchange="watched(this.value, '+id+');" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
-        $('#pud').append('<p>'+data.description+'<p>');
-
+        $('#pud').append('<p class="p-title"><strong>'+data.title+'</strong><p>');
+        $('#pud').append('<img src="'+data.poster+'" class="p-title"><br>');
+        $('#pud').append('<p class="p-title"> Please select a rating on how you found this movie.</p>')
+        $('#pud').append('<select class="p-title" onchange="watched(this.value, '+id+');" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
+        $('#pud').append('<p style="padding: 5px">'+data.description+'<p>');
       })
   }
 
