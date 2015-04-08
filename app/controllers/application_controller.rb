@@ -6,8 +6,14 @@ class ApplicationController < ActionController::Base
   helper_method :feature_movie
 
   def feature_movie
-    @movies = Movie.all
-    @movie = @movies.sample
+    matching_movies = []
+    all_movies = Movie.all
+    all_movies.each do |movie|
+      if movie.title.downcase.include? 'ultron'
+        matching_movies << movie
+      end
+    end
+    @movie = matching_movies.sample
   end
 
 end
