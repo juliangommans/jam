@@ -56,7 +56,8 @@
   <div class="container body-content">
          <%= yield %>
       <footer class="footer">
-        <hr>Team JAM-mer's Jullian Gommans, Sandra Muller, Steven Brown
+        <% time = Time.now %>
+        <p style="padding-top:10px">Team JAM-mer's Jullian Gommans, Sandra Muller, Steven Brown- <%= time.strftime("It's %-l:%M%P on %A, %-d %B %Y") %></p>
       </footer>
   </div>
 </body>

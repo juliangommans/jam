@@ -221,8 +221,8 @@ var movie;
         $('#pud').append('<img src="'+data.poster+'" class="p-title"><br>');
         $('#pud').append('<p class="p-title"> Please select a rating on how you found this movie.</p>')
         $('#pud').append('<select class="p-title" ><option value="">How would you rate this?</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select><br>');
-        $('#pud').append('<p style="padding: 5px">'+data.description+'<p>');
-         $('#pud').append('<br><input type="button" style="text-align:center; padding:10px" class="update" value="Update" onclick="watched(this.value, '+id+');"/>');
+        $('#pud').append('<p style="text-align: justify; padding: 5px">'+data.description+'<p>');
+         $('#pud').append('<br><input type="button" style="margin:10px; margin-left:43%" class="update" value="Update" onclick="watched(this.value, '+id+');"/>');
       })
   }
 
