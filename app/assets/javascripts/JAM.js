@@ -86,7 +86,7 @@ var movie;
        $('.viewTrailer').append('<p>'+data.embed+'</p>')
     })
     .fail(function(data) {
-      $('.viewTrailer').append('<h1><strong>"We could not find the trailer for this movie."</strong></h1>');
+      $('.viewTrailer').append('<h1 class="missing"><strong>"We could not find the trailer for this movie."</strong></h1>');
     })
   }
 
