@@ -25,7 +25,7 @@ class MoviejamsController < ApplicationController
     redirect_to new_user_session_path unless user_signed_in?
     @moviejam = Moviejam.find(params[:id])
     @moviejam.watched = true
-    @moviejam.postrating = rand(-1..5)#-1 i.e. no rating yet
+    @moviejam.postrating = params[:score]
     @moviejam.save
     redirect_to moviejams_path
   end
@@ -62,6 +62,7 @@ class MoviejamsController < ApplicationController
     moviejams = Moviejam.all
     @featuredata = {movie: movie, moviejams: Moviejam.filter_featuredata(movie, moviejams)}
   end
+
 
   def check_db(movie)
     Moviejam.find_by(user_id: current_user, movie_id: movie)

@@ -59,7 +59,7 @@ var movie;
   function AppendInfo(){
     $('.viewTrailer').children().remove();
     $('.viewTrailer').append('<h3><strong>'+currentMovie.title+'</strong></h3>');
-    $('.viewTrailer').append('<h1 id="missing"><strong>"We could not find the trailer for this movie."</strong></h1>');
+    $('.viewTrailer').append('<h1 class="missing"><strong>"We could not find the trailer for this movie."</strong></h1>');
     CurrentMoviePlot(currentMovie);
   }
 
@@ -73,12 +73,8 @@ var movie;
           $('.viewTrailer').append('<p id="movieDescription" style="text-align:justify">'+data.description+'</p>');
         }
         $('#movieScore').remove();
-        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
+        $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select a Rating</option><option value="0">0 Stars</option><option value="1">1 Star</option><option value="2">2 Stars</option><option value="3">3 Stars</option><option value="4">4 Stars</option><option value="5">5 Stars</option></select>');
       })
-      // .fail(function(data) {
-      //   $('.viewTrailer').append('<p> unfortunately we could not find a description for this movie</p>');
-      //   $('.viewTrailer').append('<select id="movieScore" onchange="CheckDB(this.value);" ><option value="">Please Select One</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>');
-      // })
   }
 
   function IMDBFeaturePage(imdb) {
@@ -212,6 +208,20 @@ var movie;
           })
     $('.myList').append('<br><input type="button" class="update" value="Update" onclick="UpdateList();"/>');
       }}
+  }
+
+  function watched(score, id){
+    if (score === ""){
+      alert("Please select a score before we can set your movie to 'watched'")
+    } else {
+      $.ajax({
+        url: '/watched/' + id +'/' + score,
+        type: "GET",
+        success: function(data,status){
+          location.reload();
+        }
+      })
+    }
   }
 
   function shuffle(array) {

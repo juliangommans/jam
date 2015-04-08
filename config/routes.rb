@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/feature/:id' => 'moviejams#feature', as: 'feature'
   get '/add/:id/:title' => 'moviejams#add', as: 'add_movie'
   post '/remove/:id' => 'moviejams#remove', as: 'remove_movie'
-  post '/watched/:id' => 'moviejams#watched', as: 'watch_movie'
+  get '/watched/:id/:score' => 'moviejams#watched', as: 'watch_movie'
 
   root 'movies#index'
 
