@@ -24,6 +24,11 @@ class MoviesController < ApplicationController
     render json: @search
   end
 
+  def dbsearch
+    @search = MoviesHelper::RottenTomatoesAPI.db_search(params[:terms])
+    render json: @search
+  end
+
   def add_feature
     new_str = params[:title].slice(0..((params[:title].index(':'))-1))
     terms = new_str.gsub(' ','+')

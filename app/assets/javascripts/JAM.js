@@ -23,7 +23,6 @@ var movie;
         .done(function (data) {
           currentMovie = data
           CurrentMoviePlot(currentMovie)
-          console.log(currentMovie)
         });
       });
     }
@@ -112,13 +111,13 @@ var movie;
       alert("please enter something in the search field")
     }else{
       popup('popUpDiv');
-      $.getJSON("/search/" + terms)
+      $.getJSON("/dbsearch/" + terms)
       .done(function (data) {
         searchedMovies = [];
-        var movies = data.movies
+        var movies = data // .movies <= for when we get api keys back
         for(var i=0;i<movies.length;i++){
           searchedMovies[i] = movies[i]
-          $('#a'+i+'').append('<img class="poster-search" src="'+movies[i].posters.profile+'"><p class="p-title">'+movies[i].title+'</p>')
+          $('#a'+i+'').append('<img class="poster-search" src="'+movies[i].poster+'"><p class="p-title">'+movies[i].title+'</p>') // s.profile <= append to 'poster' after we get api key back
         }
           $('.movie-link').on('click', function(e) {
             e.preventDefault();

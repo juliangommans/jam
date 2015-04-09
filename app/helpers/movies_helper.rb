@@ -21,16 +21,21 @@ module MoviesHelper
     include HTTParty
 
     def self.upcoming
-      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=sp2s3x4cpvbp8psp949pphfp")
+      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=ksh5rabkgg7mm8wdms9prax3")
       add_movies(hash(data))
       return data.strip
     end
 
     def self.search(name)
       terms = name.gsub(' ','+')
-      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=sp2s3x4cpvbp8psp949pphfp&q="+terms+"&page_limit=10")
+      data = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=ksh5rabkgg7mm8wdms9prax3&q="+terms+"&page_limit=10")
       add_movies(hash(data))
       return data.strip
+    end
+
+    def self.db_search(name)
+      data = Movie.where('title ILIKE ?', '%'+name+'%')
+      return data
     end
 
     def self.check_description(movies)

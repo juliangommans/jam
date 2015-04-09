@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/mytrailer/:imdb' => 'movies#mytrailer', as: 'movie_mytrailer'
   get '/find/:title' => 'movies#find', as: 'movie_find'
   get '/feature/add/:title' => 'movies#add_feature', as: 'add_feature_to_movies'
+  get '/dbsearch/:terms' => 'movies#dbsearch', as: 'movie_db_search'
 
   get '/index/upcoming' => 'upcomingmovies#index', as: 'upcoming_movies'
 
