@@ -84,7 +84,7 @@ var movie;
     $('.viewTrailer').children().remove();
     $.getJSON("/mytrailer/" + imdb)
     .done(function (data) {
-       $('.viewTrailer').append('<p>'+data.embed+'</p>')
+      $('.viewTrailer').append('<p>'+data.embed+'</p>')
     })
     .fail(function(data) {
       $('.viewTrailer').append('<h1 class="missing"><strong>"We could not find the trailer for this movie."</strong></h1>');
@@ -111,7 +111,7 @@ var movie;
       alert("please enter something in the search field")
     }else{
       popup('popUpDiv');
-      $.getJSON("/dbsearch/" + terms)
+      $.getJSON("/dbsearch/" + terms) // change 'dbsearch' to plain old 'search'
       .done(function (data) {
         searchedMovies = [];
         var movies = data // .movies <= for when we get api keys back
@@ -123,10 +123,11 @@ var movie;
             e.preventDefault();
             var index = $(this).attr('id').replace(/a/,'')
             currentMovie = movies[index];
-              if (movies[index].alternate_ids === undefined){
+              if (movies[index] === undefined){ // .alternate_ids <= append to 'movies[index]' when api key is working
                 AppendInfo();
               } else {
-                imdb = movies[index].alternate_ids.imdb;
+                imdb = movies[index].imdb; // .alternate_ids <= append to 'movies[index]' when api key is working
+                AppendInfo();
                 IMDBtrailer(imdb);
               }
           });
